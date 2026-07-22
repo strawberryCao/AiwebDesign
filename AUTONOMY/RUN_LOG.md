@@ -2,6 +2,23 @@
 
 Append-only evidence ledger. Newest entries go at the top below this introduction. Never remove or rewrite a completed entry; add a correction entry instead.
 
+## ITERATION 1 — blocked before source edit — 2026-07-22T19:04:14+08:00
+- Actor: primary-loop
+- Lease: none was active at hydration; no source-changing lease was retained because the mandatory baseline could not be executed or verified in this runtime.
+- Objective: `Q-001` — establish the first trustworthy Cloudflare baseline for the exact current `main` SHA before any product edit.
+- Starting SHA: `c01b00362e3418c3e8836b161b7a10fd61bda45f` (`research: refresh technical and asset radar`).
+- Baseline deployment: blocked; no accessible Cloudflare deployment action, credentials/project execution context, canonical deployment URL, deployment identifier or commit-to-deployment mapping was available.
+- GitHub evidence: the starting SHA returned no combined status checks. Absence of checks is not build or deployment success evidence.
+- Baseline observations: desktop, mobile, full-scroll, console, reduced-motion, loading and failure-recovery observations could not be performed because no live URL tied to the starting SHA was available.
+- Product source/build/deployment changes: none. `index.html`, `src/**`, build configuration and application assets were not edited.
+- Validation: `npm install`, `npm run check` and `npm run build` were not claimed or fabricated; this runtime had repository API access but no checked-out execution workspace or verified Cloudflare deployment channel.
+- Candidate SHA / deployment: none.
+- Scores: builder, independent and accepted scores remain `unknown`; no direct browser or deployment evidence exists.
+- Memory updates: no durable lesson promoted. Existing asset research commits were observed, but no new asset entered a candidate build.
+- Next objective: remains `Q-001` until a real Cloudflare deployment can be produced and tied to the exact then-current `main` SHA.
+- Blockers: Cloudflare credentials/project access or a callable deployment integration; canonical live URL; exact SHA-to-deployment evidence; HTTP result and browser verification.
+- Rollback: none required because no product candidate was created.
+
 ## GOVERNANCE AUDIT — baseline remains blocked — 2026-07-22T18:14:21+08:00
 - Actor: health-guard
 - Lease: none active; `STATE.json.lease` owner, iteration, acquired time and expiry were all null.
