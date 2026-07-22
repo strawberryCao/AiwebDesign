@@ -2,6 +2,23 @@
 
 Append-only evidence ledger. Newest entries go at the top below this introduction. Never remove or rewrite a completed entry; add a correction entry instead.
 
+## ITERATION 2 — blocked before source edit — 2026-07-22T21:05:42+08:00
+- Actor: primary-loop.
+- Lease: none active at hydration; no source-changing lease was retained because the mandatory browser gate could not be completed.
+- Objective: `Q-001` — complete exact-SHA desktop/mobile browser verification before any product source edit.
+- Starting SHA: `d228f1acd0164e1af37a6a1b881305de10dc207f` (`memory: pin GPT-5.6 Sol High`).
+- Baseline deployment: immutable receipt `deployment-records:AUTONOMY/deployments/d228f1acd0164e1af37a6a1b881305de10dc207f.json` matches the exact main SHA, records GitHub Actions run `29922376480`, URL `https://aiwebdesign-polar-index.caoheming139.workers.dev`, deployment time `2026-07-22T13:06:12.927Z`, and `build.smoke_test: passed`.
+- Browser execution evidence: the runtime has Playwright installed and system Chromium at `/usr/bin/chromium`. Launch succeeded, but navigation to the verified Cloudflare URL failed at the environment policy layer with `net::ERR_BLOCKED_BY_ADMINISTRATOR`.
+- Browser-install fallback: `playwright install chromium` failed because the runtime could not resolve `cdn.playwright.dev` or `playwright.download.prss.microsoft.com` (`EAI_AGAIN`). This does not indicate an application or Cloudflare failure.
+- Baseline observations: desktop, mobile, full-scroll, console, page-error, failed-request, reduced-motion, remote-font loading and WebGL context-loss recovery remain unverified.
+- Product source/build configuration/application assets changed: none.
+- Validation boundary: the exact-SHA GitHub Actions receipt proves install, syntax check, production build, Cloudflare deployment and top-level HTTP smoke test; it does not substitute for browser evidence.
+- Candidate SHA / deployment: none.
+- Scores: builder, independent and accepted scores remain `unknown`; no visual score was inferred.
+- Next objective: remains `Q-001` until an execution environment capable of browser navigation to the deployed `workers.dev` URL performs the required evidence matrix.
+- Blocker: automation runtime outbound-browser policy, not repository credentials, build, deployment or application code.
+- Rollback: `d228f1acd0164e1af37a6a1b881305de10dc207f`; no rollback action required because no product candidate was created.
+
 ## MEMORY CURATION — deployment evidence correction — 2026-07-22T19:50:35+08:00
 - Actor: memory-curator.
 - Lease: none active; `STATE.json.lease` owner, iteration and expiry were null at hydration.
