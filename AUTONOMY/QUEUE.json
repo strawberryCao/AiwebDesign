@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-22T20:41:42+08:00",
-  "selectionRule": "Choose one highest-value item supported by live evidence; never bundle unrelated items.",
+  "updatedAt": "2026-07-22T22:41:51+09:00",
+  "selectionRule": "Choose one highest-value ready item supported by exact-SHA deployment and browser evidence; never bundle unrelated items.",
   "items": [
     {
       "id": "Q-001",
       "title": "Complete verified Cloudflare baseline browser audit",
-      "status": "baseline_deployed_browser_verification_ready",
-      "priority": 100,
-      "expectedGain": "unblocks all evidence-based iteration",
-      "risk": "headless WebGL differences or incomplete failure evidence",
+      "status": "completed",
+      "priority": 0,
+      "expectedGain": "unblocked all evidence-based iteration",
+      "risk": "closed by exact-SHA GitHub Actions evidence",
       "researchRefs": [
         "EXP-003",
         "EXP-004"
@@ -21,12 +21,19 @@
         "record console, page-error and failed-request observations",
         "verify reduced-motion behavior",
         "exercise WebGL failure or context-loss recovery when supported"
-      ]
+      ],
+      "evidence": {
+        "sourceSha": "d22c6e8b2664965696ff7b02c792e6e1965f5fb2",
+        "deploymentReceipt": "deployment-records:AUTONOMY/deployments/d22c6e8b2664965696ff7b02c792e6e1965f5fb2.json",
+        "browserAuditReceipt": "deployment-records:AUTONOMY/browser-audits/d22c6e8b2664965696ff7b02c792e6e1965f5fb2.json",
+        "workflowRunId": "29924558425",
+        "result": "passed"
+      }
     },
     {
       "id": "Q-006",
       "title": "Self-host and audit active fonts",
-      "status": "researched_blocked_by_Q-001",
+      "status": "ready",
       "priority": 92,
       "expectedGain": "removes fragile font hotlinks and closes a documented provenance blocker",
       "risk": "font metric changes or unnecessary payload",
@@ -41,7 +48,7 @@
     {
       "id": "Q-002",
       "title": "Replace linear camera descent with authored camera rail",
-      "status": "blocked_by_Q-001",
+      "status": "ready",
       "priority": 90,
       "expectedGain": "major improvement to spatial storytelling and transitions",
       "risk": "scroll desynchronization or motion sickness",
@@ -54,7 +61,7 @@
     {
       "id": "Q-003",
       "title": "Create distinct procedural world identities",
-      "status": "blocked_by_Q-001",
+      "status": "ready",
       "priority": 85,
       "expectedGain": "reduces repeated-cluster appearance and improves project differentiation",
       "risk": "GPU cost and visual incoherence",
@@ -67,7 +74,7 @@
     {
       "id": "Q-007",
       "title": "Evaluate a CC0 snowy HDRI lighting pass",
-      "status": "researched_blocked_by_Q-001",
+      "status": "ready",
       "priority": 82,
       "expectedGain": "may add coherent crystalline reflections and roughness depth",
       "risk": "literal outdoor reflections, startup cost or mobile memory pressure",
@@ -82,7 +89,7 @@
     {
       "id": "Q-004",
       "title": "Add cinematic loading and failure recovery",
-      "status": "blocked_by_Q-001",
+      "status": "ready",
       "priority": 80,
       "expectedGain": "improves first impression and resilience",
       "risk": "fake progress or delayed interaction",
@@ -96,7 +103,7 @@
     {
       "id": "Q-005",
       "title": "Implement measured adaptive quality",
-      "status": "blocked_by_Q-001",
+      "status": "ready",
       "priority": 75,
       "expectedGain": "stabilizes visual quality across devices",
       "risk": "quality oscillation or unreliable heuristics",
