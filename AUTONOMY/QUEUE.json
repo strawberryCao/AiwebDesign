@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-22T17:30:00+09:00",
+  "updatedAt": "2026-07-22T18:40:00+08:00",
   "selectionRule": "Choose one highest-value item supported by live evidence; never bundle unrelated items.",
   "items": [
     {
@@ -15,6 +15,21 @@
         "record real Cloudflare URL and HTTP status",
         "inspect desktop and mobile",
         "record console and full-scroll observations"
+      ]
+    },
+    {
+      "id": "Q-006",
+      "title": "Self-host and audit active fonts",
+      "status": "researched_blocked_by_Q-001",
+      "priority": 92,
+      "expectedGain": "removes fragile font hotlinks and closes a documented provenance blocker",
+      "risk": "font metric changes or unnecessary payload",
+      "researchRef": "EXP-001",
+      "acceptance": [
+        "exact Inter and DM Mono package licenses/authors recorded",
+        "no requests to Google Fonts hosts",
+        "only required WOFF2 weights/subsets included",
+        "typography and fallback behavior verified on deployed candidate"
       ]
     },
     {
@@ -41,6 +56,21 @@
         "at least three visibly distinct procedural systems",
         "shared art direction remains coherent",
         "adaptive quality limits geometry cost"
+      ]
+    },
+    {
+      "id": "Q-007",
+      "title": "Evaluate a CC0 snowy HDRI lighting pass",
+      "status": "researched_blocked_by_Q-001",
+      "priority": 82,
+      "expectedGain": "may add coherent crystalline reflections and roughness depth",
+      "risk": "literal outdoor reflections, startup cost or mobile memory pressure",
+      "researchRef": "EXP-002",
+      "acceptance": [
+        "use a vendored 1K or 2K CC0 HDR variant",
+        "record transfer and decoded-memory cost",
+        "compare material depth against procedural-light baseline",
+        "retain clean procedural-light fallback"
       ]
     },
     {
