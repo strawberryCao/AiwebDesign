@@ -1,0 +1,12 @@
+{
+  "iteration": 0,
+  "expectationScore": 92,
+  "consecutivePassingRoundsRequired": 2,
+  "consecutivePassingRounds": 0,
+  "phase": "bootstrap",
+  "lastBaselineCommit": null,
+  "lastDeploymentUrl": null,
+  "lastScore": null,
+  "blockers": ["Cloudflare credentials and first successful deployment have not been verified"],
+  "updatedAt": "2026-07-22T17:00:00+09:00"
+}
