@@ -8,6 +8,7 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - The implementation and product identity must remain original. Recreate interaction principles and perceived quality, not protected brand identity or private source bundles.
 - Suitable external assets are encouraged when they materially improve quality or iteration speed, provided their provenance and usage basis are recorded.
 - The system should improve autonomously in two-hour cycles and persist all useful memory in this repository.
+- The user requires every AiwebDesign autonomous role to remain on **GPT-5.6 sol**. The system must not intentionally change, downgrade, rotate or auto-select another model.
 
 ## Product identity
 - Working title: **Polar Index**.
@@ -22,8 +23,10 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - Keep short-term hypotheses separate from long-term memory.
 - Evidence must include commit identity, deployment identity and observable verification; unsupported claims are not memory.
 - Treat external-asset provenance, licensing basis, attribution, optimization and fallback as part of production quality rather than optional documentation.
+- Model selection is a user-owned invariant, not an optimization target for critics, curators, guards, technical research or future prompts.
 
 ## Hard constraints
+- Use GPT-5.6 sol for all AiwebDesign autonomous roles and do not intentionally switch models.
 - Do not extract or republish reference-site private source bundles, brand copy, logos or files whose reuse rights are unknown.
 - Register every non-trivial external asset in `AUTONOMY/ASSETS.md` before it can support a completion claim.
 - No source edit while another valid primary lease exists.
