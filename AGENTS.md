@@ -36,6 +36,13 @@ One scheduled run performs the complete sequence itself:
 
 Do not split one iteration across stateless conversations.
 
+## Cloudflare deployment evidence
+- `.github/workflows/deploy-cloudflare.yml` is the canonical production deployment path.
+- The workflow must install dependencies, run `npm run check`, run `npm run build`, deploy the exact triggering commit with Wrangler, smoke-test the public URL, and publish an immutable receipt.
+- Deployment receipts live on the `deployment-records` branch at `AUTONOMY/deployments/<source-sha>.json`; `latest.json` is only a convenience pointer.
+- A baseline or candidate is verified only when the receipt's `source_sha` exactly matches the commit being evaluated and its `build.smoke_test` is `passed`.
+- Cloudflare credentials belong only in GitHub Actions secrets named `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. Never write their values to source, logs, issues, prompts, or autonomy documents.
+
 ## Build and evidence gates
 - Baseline deployment must be attempted and recorded before source edits.
 - Run `npm install --no-audit --no-fund`, `npm run check`, and `npm run build` before pushing.
