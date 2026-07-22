@@ -2,6 +2,18 @@
 
 Append-only evidence ledger. Newest entries go at the top below this introduction. Never remove or rewrite a completed entry; add a correction entry instead.
 
+## INDEPENDENT VISUAL AUDIT — blocked — 2026-07-22T19:27:01+08:00
+- Actor: visual-critic.
+- Lease: none active in `STATE.json`; owner and expiry are null.
+- Repository head: `b8da7f9c1549fac45da997c6b78576c0c806ccfe`.
+- Deployment evidence: no `deployment-records` branch and no SHA-bound deployment receipt were available for the current head.
+- Candidate: none; no verified Cloudflare URL, deployment ID, HTTP smoke-test result or exact SHA mapping exists.
+- Browser review: not performed. Desktop, mobile, full-scroll, transitions, camera, materials, typography, pointer/touch, console, reduced-motion, loading and fallback behavior remain unverified.
+- Asset review: production loading, size, visual coherence and fallback behavior remain unverified because there is no candidate deployment.
+- Scores: all independent rubric dimensions remain `unknown`; no accepted score was produced.
+- Decision: blocked. The deployment workflow exists, but a successful receipt tied to an exact commit SHA is still required before visual review.
+- Product source, build configuration and application assets changed: none.
+
 ## ITERATION 1 — blocked before source edit — 2026-07-22T19:04:14+08:00
 - Actor: primary-loop
 - Lease: none was active at hydration; no source-changing lease was retained because the mandatory baseline could not be executed or verified in this runtime.
