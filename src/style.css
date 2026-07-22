@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root { color-scheme: dark; --ink:#eaf5f7; --muted:#9cb0b8; --accent:#a8f7ff; --bg:#071018; }
+* { box-sizing:border-box; }
+html { scroll-behavior:auto; background:var(--bg); }
+body { margin:0; min-height:100%; color:var(--ink); background:var(--bg); font-family:Inter, sans-serif; overflow-x:hidden; cursor:none; }
+body::before { content:""; position:fixed; inset:0; z-index:-1; background:radial-gradient(circle at 50% 15%,rgba(72,145,166,.18),transparent 35%),linear-gradient(180deg,#071018 0%,#02080d 100%); }
+#scene { position:fixed; inset:0; width:100%; height:100%; z-index:0; }
+.grain { position:fixed; inset:-50%; z-index:2; pointer-events:none; opacity:.055; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); animation:grain .18s steps(2) infinite; }
+@keyframes grain { 0%{transform:translate3d(0,0,0)} 25%{transform:translate3d(2%,-3%,0)} 50%{transform:translate3d(-3%,2%,0)} 75%{transform:translate3d(3%,3%,0)} }
+.topbar { position:fixed; inset:0 0 auto; z-index:10; display:flex; justify-content:space-between; align-items:center; padding:24px 30px; mix-blend-mode:difference; font:500 11px/1 DM Mono,monospace; letter-spacing:.14em; }
+.brand,.contact-link { color:inherit; text-decoration:none; }
+.status { display:flex; align-items:center; gap:9px; opacity:.7; }
+.status i { width:6px; height:6px; border-radius:50%; background:#b4ffde; box-shadow:0 0 16px #b4ffde; }
+.menu,.project-link { color:inherit; border:0; background:none; font:inherit; letter-spacing:inherit; cursor:none; }
+.menu span,.project-link span,.contact-link span { display:inline-block; margin-left:8px; }
+.panel { position:relative; z-index:3; min-height:100vh; padding:14vh 7vw 10vh; display:flex; flex-direction:column; justify-content:center; }
+.hero { min-height:125vh; justify-content:flex-start; padding-top:21vh; }
+.eyebrow { margin:0 0 28px; color:var(--muted); font:400 10px/1.4 DM Mono,monospace; letter-spacing:.18em; text-transform:uppercase; }
+.hero-title { margin:0; width:min(1160px,92vw); font-size:clamp(58px,11vw,170px); line-height:.78; letter-spacing:-.075em; font-weight:800; }
+.hero-title .line { display:block; overflow:hidden; padding-right:.1em; }
+.hero-title .line>span { display:block; }
+.hero-title .offset { padding-left:12vw; color:transparent; -webkit-text-stroke:1px rgba(234,245,247,.72); }
+.hero-meta { margin-top:55px; display:flex; justify-content:space-between; gap:40px; width:min(620px,70vw); font:400 11px/1.6 DM Mono,monospace; color:var(--muted); }
+.hero-meta p { max-width:420px; margin:0; }
+.scroll-cue { margin-top:auto; display:flex; gap:12px; align-items:center; color:var(--muted); font:400 9px/1 DM Mono,monospace; letter-spacing:.2em; }
+.scroll-cue span { width:46px; height:1px; background:currentColor; transform-origin:left; animation:pulse 1.8s ease-in-out infinite; }
+@keyframes pulse { 50%{transform:scaleX(.25);opacity:.35} }
+.project { min-height:140vh; padding-bottom:25vh; }
+.project-copy { width:min(650px,70vw); }
+.project h2,.manifesto h2,.contact h2 { margin:0; font-size:clamp(58px,8.5vw,132px); line-height:.83; letter-spacing:-.065em; font-weight:750; }
+.project .summary { width:min(390px,80%); margin:38px 0 28px; color:var(--muted); font-size:14px; line-height:1.6; }
+.project-index { position:absolute; top:18vh; right:7vw; font:300 clamp(80px,13vw,210px)/1 DM Mono,monospace; color:rgba(196,226,235,.08); }
+.project-data { position:absolute; bottom:18vh; left:7vw; display:flex; gap:22px; font:400 9px/1 DM Mono,monospace; letter-spacing:.16em; color:var(--muted); }
+.project-link { padding:14px 0; border-bottom:1px solid rgba(234,245,247,.5); }
+.align-right { align-items:flex-end; text-align:right; }
+.align-right .summary { margin-left:auto; }
+.align-right .project-index { right:auto; left:7vw; }
+.align-right .project-data { left:auto; right:7vw; }
+.manifesto { min-height:125vh; align-items:center; text-align:center; }
+.manifesto h2 { max-width:1150px; }
+.manifesto h2 em { color:var(--accent); font-style:normal; text-shadow:0 0 50px rgba(168,247,255,.22); }
+.manifesto>p:last-child { max-width:510px; margin-top:42px; color:var(--muted); font:400 13px/1.7 DM Mono,monospace; }
+.contact { min-height:115vh; justify-content:flex-end; padding-bottom:38px; }
+.contact h2 { margin-bottom:48px; }
+.contact-link { align-self:flex-start; padding:16px 0; border-bottom:1px solid; font:500 11px/1 DM Mono,monospace; letter-spacing:.16em; }
+.contact footer { margin-top:19vh; display:flex; justify-content:space-between; color:var(--muted); font:400 8px/1 DM Mono,monospace; letter-spacing:.12em; }
+.progress { position:fixed; right:28px; top:50%; z-index:9; width:1px; height:120px; background:rgba(255,255,255,.15); transform:translateY(-50%); }
+.progress span { display:block; width:1px; height:0; background:var(--ink); }
+.scene-label { position:fixed; z-index:9; left:30px; bottom:26px; color:var(--muted); font:400 9px/1 DM Mono,monospace; letter-spacing:.15em; }
+.scene-label b { color:var(--ink); font-weight:400; }
+.cursor { position:fixed; z-index:30; width:36px; height:36px; border:1px solid rgba(235,250,255,.65); border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); transition:width .25s,height .25s,background .25s; mix-blend-mode:difference; }
+.cursor span { position:absolute; width:3px; height:3px; border-radius:50%; background:#fff; top:50%; left:50%; transform:translate(-50%,-50%); }
+.cursor.active { width:58px; height:58px; background:rgba(255,255,255,.12); }
+@media (max-width:720px){ body{cursor:auto}.cursor{display:none}.topbar{padding:18px}.status{display:none}.panel{padding-left:20px;padding-right:20px}.hero{padding-top:19vh}.hero-title{font-size:18vw}.hero-title .offset{padding-left:4vw}.hero-meta{width:100%}.project{min-height:120vh}.project-copy{width:100%}.project h2,.manifesto h2,.contact h2{font-size:16vw}.project-data{left:20px;right:auto;flex-wrap:wrap}.align-right .project-data{right:20px}.progress{right:12px}.scene-label{left:18px}.contact footer{gap:20px;align-items:flex-end}.contact footer span:last-child{text-align:right}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.grain,.scroll-cue span{animation:none}.cursor{display:none}body{cursor:auto}}
