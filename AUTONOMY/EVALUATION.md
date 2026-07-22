@@ -20,6 +20,17 @@
 
 ## History
 
+### Iteration 1 — 2026-07-22
+- Objective: establish a verified Cloudflare baseline for exact `main` SHA `c01b00362e3418c3e8836b161b7a10fd61bda45f`.
+- Baseline SHA / URL: SHA observed; URL unavailable and deployment identity unverified.
+- Candidate SHA / URL: none.
+- Evidence: no combined GitHub status checks; no callable Cloudflare deployment context, canonical URL, HTTP result or browser evidence.
+- Builder score: unknown.
+- Independent critic score: unknown.
+- Accepted score: unknown.
+- Regressions: none introduced because no product source or candidate was created.
+- Decision: blocked.
+
 ### Bootstrap
 - Baseline commit: unknown
 - Deployment URL: unverified
