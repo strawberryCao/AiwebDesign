@@ -1,4 +1,4 @@
-# Autonomous WebGL Iteration Contract v3
+# Autonomous WebGL Iteration Contract v4
 
 ## Goal
 Build a production-grade immersive WebGL portfolio experience approaching the interaction architecture and perceived quality of leading immersive studios: cinematic spatial travel, authored transitions, procedural worlds, shader-led atmosphere, synchronized editorial typography, tactile interaction and stable adaptive performance. External reusable assets are encouraged when they materially improve the result; product identity and implementation decisions must remain original.
@@ -14,17 +14,25 @@ The same 120-minute window also contains four tightly staggered support checks:
 
 Support jobs do not edit product source. They must honor the primary lease and skip or remain read-only when the writer is active.
 
+## Canonical deployment path
+- GitHub Actions workflow: `.github/workflows/deploy-cloudflare.yml`.
+- Cloudflare credentials exist only as GitHub Actions secrets: `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+- Every push to `main` runs install, syntax check, production build, Wrangler deployment and an HTTP smoke test.
+- Successful runs write immutable receipts to the `deployment-records` branch at `AUTONOMY/deployments/<source-sha>.json`.
+- A deployment is valid evidence only when the receipt's `source_sha` equals the exact evaluated commit and `build.smoke_test` is `passed`.
+- `AUTONOMY/deployments/latest.json` is a pointer, not proof of correspondence.
+
 ## Primary state machine
 1. **Hydrate** — read `AGENTS.md` and all relevant `AUTONOMY/**` memory.
 2. **Acquire** — atomically acquire `STATE.json.lease`; skip if another valid writer exists.
-3. **Baseline** — identify and deploy/verify the untouched current `main` SHA.
-4. **Observe** — inspect desktop/mobile full journey, interactions, console, reduced motion and failure behavior.
+3. **Baseline** — identify current `main` SHA and fetch its immutable receipt from the `deployment-records` branch. A lease/state-only commit may trigger deployment, but product source must remain untouched until the receipt exists and matches.
+4. **Observe** — inspect the receipt's public URL on desktop/mobile: full journey, interactions, console, reduced motion and failure behavior.
 5. **Plan** — select one evidence-supported objective from `NEXT_PROMPT.md` and `QUEUE.json`.
 6. **Source** — when useful, select reusable external models, HDRIs, textures, fonts, icons, audio, video or libraries; update `ASSETS.md` before shipping them.
 7. **Build** — implement one coherent batch only.
-8. **Validate** — install, syntax check, production build, asset loading/fallback checks and browser verification.
+8. **Validate** — install, syntax check, production build, asset loading/fallback checks and local/browser verification.
 9. **Commit** — push `iter-N: <objective>` only after validation passes.
-10. **Candidate** — deploy and inspect the new SHA.
+10. **Candidate** — wait for/fetch the immutable deployment receipt for the new commit and inspect its public URL.
 11. **Compare** — score baseline vs candidate using `EVALUATION.md`; record regressions.
 12. **Consolidate** — update run log, evaluation, working set, queue, next prompt, asset ledger and durable memory when eligible.
 13. **Release** — write final state and clear the lease.
@@ -32,10 +40,10 @@ Support jobs do not edit product source. They must honor the primary lease and s
 ## Checkpoints
 Write state after these boundaries:
 - lease acquired;
-- baseline verified or blocked;
+- baseline receipt verified or blocked;
 - asset selection/provenance recorded when applicable;
 - build validated;
-- candidate verified;
+- candidate receipt and browser behavior verified;
 - memory consolidated and lease released.
 
 If interrupted, the next run reads the last checkpoint and resumes or safely rolls back. It must not invent missing evidence.
@@ -68,13 +76,14 @@ Stop source modification only after an independent critic records at least 92/10
 - Fixed automation prompts are not self-rewritten. This protects invariants against prompt drift.
 
 ## Failure policy
-- Missing Cloudflare credentials or access: record exact blocker and release lease without source edits.
-- Baseline deployment failure: do not edit source.
+- Missing GitHub Actions Cloudflare secrets: record exact blocker and release lease without source edits.
+- Missing, mismatched or failed deployment receipt: do not edit or accept product source.
+- GitHub Actions build/deploy failure: do not claim a baseline/candidate and do not score it.
 - Unknown or incompatible asset rights: replace the asset before shipping.
 - Asset load failure without fallback: do not accept the candidate.
-- Build failure: do not push.
+- Local build failure: do not push.
 - Candidate regression: record rollback target and either revert in the same primary run when safe or mark blocked for the next run.
 - Active lease or ambiguous state: skip rather than race.
 
 ## Evidence policy
-Never claim deployment, screenshots, browser behavior, performance, asset rights or scores without direct evidence tied to a commit, URL or source record. Issue #1 may mirror status for humans, but repository files are the source of truth.
+Never claim deployment, screenshots, browser behavior, performance, asset rights or scores without direct evidence tied to a commit, immutable receipt, URL or source record. Issue #1 may mirror status for humans, but repository files and the deployment-records branch are the source of truth.
