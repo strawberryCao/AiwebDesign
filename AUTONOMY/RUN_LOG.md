@@ -2,6 +2,23 @@
 
 Append-only evidence ledger. Newest entries go at the top below this introduction. Never remove or rewrite a completed entry; add a correction entry instead.
 
+## GOVERNANCE AUDIT — baseline remains blocked — 2026-07-22T18:14:21+08:00
+- Actor: health-guard
+- Lease: none active; `STATE.json.lease` owner, iteration, acquired time and expiry were all null.
+- Repository head observed before governance edits: `926872e3dd8da07519accab416820e0c73af6af0` (`memory: consolidate verified lessons`).
+- Concurrency finding: no live or stale primary-loop lease and no lease-to-commit conflict.
+- Deployment and CI evidence:
+  - `STATE.json` contained no baseline SHA/URL/deployment ID/HTTP status and no candidate SHA/URL/deployment ID/HTTP status.
+  - `EVALUATION.md` still records the bootstrap result as blocked pending a verified Cloudflare baseline; all scores remain unknown.
+  - Issue #1 contains `[ITERATION 1][BASELINE] BLOCKED` for `cd25f37d424fbceaf0a5269a47429dabb85f9117`, with no accessible Cloudflare execution context, no canonical URL and no HTTP result.
+  - The current repository head had no combined GitHub status checks; no successful build or Cloudflare deployment can be inferred from that absence.
+- Prompt-governance finding: `AGENTS.md` preserved baseline-first, build, evidence and asset-provenance gates, but `NEXT_PROMPT.md` did not explicitly require `ASSETS.md` updates for newly introduced assets and retained an outdated blanket wording around media. The dynamic objective was corrected to allow traceable external assets while requiring provenance, optimization, fallback and shipped verification.
+- Asset finding: `ASSETS.md` covers the externally evidenced Google Fonts, Three.js and GSAP/ScrollTrigger dependencies, but all three remain `needs_review` for canonical license/author records, introduction commits and production-loading verification. No external models, HDRIs, textures, icons, audio or video are currently evidenced.
+- Health decision: blocked. The repository has no verified production baseline, no candidate, no accepted score and zero consecutive passing rounds. Completion is not permitted.
+- Product source/build/deployment changes: none.
+- Rollback: none required; no candidate product change was accepted. `rollbackCommit` remains null because no verified product baseline SHA exists.
+- Required recovery: provide Cloudflare credentials/project access to the executing runtime or produce deployment evidence tied to the exact current main SHA; then run the baseline-first closed loop. Verify canonical licenses and production loading/fallback behavior for active external dependencies before completion.
+
 ## MEMORY CURATION — provenance correction — 2026-07-22T17:48:28+08:00
 - Actor: memory-curator
 - Lease: none active; `STATE.json.lease` owner and expiry were null at read time.
