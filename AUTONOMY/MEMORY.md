@@ -5,7 +5,8 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 ## User intent
 - The desired result is a visually exceptional, cinematic, spatial Web experience with strong 3D motion and interaction.
 - The reference quality bar includes publicly visible work from Igloo Inc., Lacoste Polo Factory Experience and WebGPU showcase projects.
-- The implementation must be original. Recreate interaction principles and perceived quality, not protected brand identity, source code or assets.
+- The implementation and product identity must remain original. Recreate interaction principles and perceived quality, not protected brand identity or private source bundles.
+- Suitable external assets are encouraged when they materially improve quality or iteration speed, provided their provenance and usage basis are recorded.
 - The system should improve autonomously in two-hour cycles and persist all useful memory in this repository.
 
 ## Product identity
@@ -20,9 +21,11 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - Separate builder self-evaluation from independent critic evaluation.
 - Keep short-term hypotheses separate from long-term memory.
 - Evidence must include commit identity, deployment identity and observable verification; unsupported claims are not memory.
+- Treat external-asset provenance, licensing basis, attribution, optimization and fallback as part of production quality rather than optional documentation.
 
 ## Hard constraints
-- No copied third-party code, text, logos, models, textures, video, audio or proprietary assets.
+- Do not extract or republish reference-site private source bundles, brand copy, logos or files whose reuse rights are unknown.
+- Register every non-trivial external asset in `AUTONOMY/ASSETS.md` before it can support a completion claim.
 - No source edit while another valid primary lease exists.
 - No push after failed syntax check or production build.
 - No completion claim until two consecutive independently verified scores reach at least 92/100.
