@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071018" />
+    <meta name="description" content="An original WebGL spatial studio inspired by frozen procedural worlds." />
+    <title>Polar Index — Spatial WebGL Studio</title>
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"><span></span></div>
+
+    <header class="topbar">
+      <a class="brand magnetic" href="#intro" aria-label="Polar Index home">POLAR/INDEX</a>
+      <div class="status"><i></i> LIVE SYSTEM</div>
+      <button class="menu magnetic" type="button" aria-label="Open navigation">INDEX <span>↗</span></button>
+    </header>
+
+    <main>
+      <section id="intro" class="panel hero" data-scene="0">
+        <p class="eyebrow reveal">Independent spatial laboratory · 2026</p>
+        <h1 class="hero-title" aria-label="Ideas preserved in motion">
+          <span class="line"><span>IDEAS</span></span>
+          <span class="line offset"><span>PRESERVED</span></span>
+          <span class="line"><span>IN MOTION</span></span>
+        </h1>
+        <div class="hero-meta reveal">
+          <p>Scroll to enter a procedural archive of objects, systems and speculative interfaces.</p>
+          <span>01 — 05</span>
+        </div>
+        <div class="scroll-cue reveal"><span></span> DESCEND</div>
+      </section>
+
+      <section class="panel project" data-scene="1">
+        <div class="project-index">01</div>
+        <div class="project-copy">
+          <p class="eyebrow">Synthetic ecology</p>
+          <h2>CRYSTAL<br />COMMONS</h2>
+          <p class="summary">A living archive where geometry grows, fractures and reconnects around collective signals.</p>
+          <button class="project-link magnetic" type="button">ENTER PROJECT <span>↗</span></button>
+        </div>
+        <div class="project-data"><span>WEBGL</span><span>GENERATIVE</span><span>REAL-TIME</span></div>
+      </section>
+
+      <section class="panel project align-right" data-scene="2">
+        <div class="project-index">02</div>
+        <div class="project-copy">
+          <p class="eyebrow">Responsive identity</p>
+          <h2>FROST<br />SIGNAL</h2>
+          <p class="summary">An identity system that changes density, refraction and rhythm in response to the visitor.</p>
+          <button class="project-link magnetic" type="button">ENTER PROJECT <span>↗</span></button>
+        </div>
+        <div class="project-data"><span>SHADERS</span><span>MOTION</span><span>IDENTITY</span></div>
+      </section>
+
+      <section class="panel manifesto" data-scene="3">
+        <p class="eyebrow">Operating principle</p>
+        <h2>THE INTERFACE<br />IS NOT A LAYER.<br /><em>IT IS THE WORLD.</em></h2>
+        <p>We prototype digital places with cinematic direction, procedural systems and interfaces that remain legible under motion.</p>
+      </section>
+
+      <section class="panel contact" data-scene="4">
+        <p class="eyebrow">Next transmission</p>
+        <h2>BUILD SOMETHING<br />IMPOSSIBLE TO<br />IGNORE.</h2>
+        <a class="contact-link magnetic" href="mailto:studio@example.com">START A CONVERSATION <span>↗</span></a>
+        <footer><span>POLAR/INDEX © 2026</span><span>ORIGINAL STUDY — NO THIRD-PARTY ASSETS</span></footer>
+      </section>
+    </main>
+
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <div class="scene-label" aria-hidden="true">SCENE <b>01</b></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
