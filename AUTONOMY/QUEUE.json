@@ -1,20 +1,26 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-07-22T18:40:00+08:00",
+  "updatedAt": "2026-07-22T20:41:42+08:00",
   "selectionRule": "Choose one highest-value item supported by live evidence; never bundle unrelated items.",
   "items": [
     {
       "id": "Q-001",
-      "title": "Establish verified Cloudflare baseline",
-      "status": "ready",
+      "title": "Complete verified Cloudflare baseline browser audit",
+      "status": "baseline_deployed_browser_verification_ready",
       "priority": 100,
       "expectedGain": "unblocks all evidence-based iteration",
-      "risk": "credentials or workflow unavailable",
+      "risk": "headless WebGL differences or incomplete failure evidence",
+      "researchRefs": [
+        "EXP-003",
+        "EXP-004"
+      ],
       "acceptance": [
-        "record exact main SHA",
-        "record real Cloudflare URL and HTTP status",
-        "inspect desktop and mobile",
-        "record console and full-scroll observations"
+        "record exact main SHA and matching immutable deployment receipt",
+        "record real Cloudflare URL and passed HTTP smoke test",
+        "inspect desktop and touch/mobile full-scroll behavior",
+        "record console, page-error and failed-request observations",
+        "verify reduced-motion behavior",
+        "exercise WebGL failure or context-loss recovery when supported"
       ]
     },
     {
@@ -80,6 +86,7 @@
       "priority": 80,
       "expectedGain": "improves first impression and resilience",
       "risk": "fake progress or delayed interaction",
+      "researchRef": "EXP-004",
       "acceptance": [
         "honest initialization progress or staged reveal",
         "WebGL failure fallback",
