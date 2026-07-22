@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "projectId": "strawberryCao/AiwebDesign",
-  "iteration": 0,
+  "iteration": 1,
   "phase": "blocked",
   "lease": {
     "owner": null,
@@ -15,7 +15,7 @@
     "consecutivePassingRounds": 0
   },
   "baseline": {
-    "commitSha": null,
+    "commitSha": "c01b00362e3418c3e8836b161b7a10fd61bda45f",
     "deploymentUrl": null,
     "deploymentId": null,
     "verifiedAt": null,
@@ -35,14 +35,15 @@
     "criticalRegression": null
   },
   "nextObjectiveId": "Q-001",
-  "lastCheckpoint": "governance-baseline-blocked",
-  "lastSuccessfulStep": "governance-audit",
+  "lastCheckpoint": "iteration-1-baseline-blocked",
+  "lastSuccessfulStep": "baseline-main-sha-observed",
   "rollbackCommit": null,
   "blockers": [
-    "Cloudflare credentials/project access, canonical deployment URL and first successful live deployment tied to the exact current main SHA have not been verified",
-    "The current main head has no successful GitHub status checks or Cloudflare deployment evidence",
-    "Canonical license/author records, introduction commits and production loading/fallback behavior for Google Fonts, Three.js and GSAP remain to be verified"
+    "No callable Cloudflare deployment integration or executing credentials/project context was available in this runtime",
+    "No canonical live URL, deployment identifier, HTTP result or exact SHA-to-deployment mapping exists for c01b00362e3418c3e8836b161b7a10fd61bda45f",
+    "The observed main SHA had no combined GitHub status checks, so build or deployment success cannot be inferred",
+    "Desktop, mobile, console, full-scroll, reduced-motion, loading and failure-recovery verification cannot proceed without a live URL tied to the exact baseline SHA"
   ],
   "memoryVersion": 2,
-  "updatedAt": "2026-07-22T18:14:21+08:00"
+  "updatedAt": "2026-07-22T19:04:14+08:00"
 }
