@@ -2,6 +2,26 @@
 
 Append-only evidence ledger. Newest entries go at the top below this introduction. Never remove or rewrite a completed entry; add a correction entry instead.
 
+## MEMORY CURATION — provenance correction — 2026-07-22T17:48:28+08:00
+- Actor: memory-curator
+- Lease: none active; `STATE.json.lease` owner and expiry were null at read time.
+- Objective: compact short-term memory, reconcile durable asset policy, audit external-asset provenance and correct evidence inconsistencies without editing product source.
+- Starting state: iteration 0, phase `idle`, no verified baseline/candidate deployment and no accepted score.
+- Files reviewed: `AGENTS.md`, `STATE.json`, `RUN_LOG.md`, `WORKING_SET.md`, `MEMORY.md`, `DECISIONS.md`, `EVALUATION.md`, `ASSETS.md`, `RESEARCH.md`, `package.json`, `src/style.css`, and the import/renderer section of `src/main.js`.
+- Findings:
+  - Durable memory still contained a blanket ban on third-party models, textures, audio and other assets, conflicting with the user's explicit authorization and the current provenance-managed asset policy.
+  - `ASSETS.md` stated that no external project assets were registered, while source evidence showed Google Fonts, Three.js and GSAP/ScrollTrigger in active use.
+  - No deployment URL, commit-to-deployment mapping, browser observation or score contradiction was present; those fields remain unverified rather than conflicting.
+- Memory updates:
+  - Added ADR-007 to record the reversal from blanket prohibition to provenance-managed external assets.
+  - Revised durable memory to allow suitable external assets while retaining original-product and unknown-rights boundaries.
+  - Compacted `WORKING_SET.md` to three evidence-grounded open questions.
+  - Registered Google Fonts, Three.js and GSAP as `needs_review` assets; exact licenses, introduction commits and live loading remain pending rather than guessed.
+- Product source changes: none.
+- Scores: unchanged; no deployment or browser evidence exists.
+- Blockers: Cloudflare credentials/canonical URL/first live baseline remain unverified; asset license records and production loading behavior require follow-up.
+- Next objective: primary loop establishes a verified Cloudflare baseline; technical radar verifies canonical licenses and asset sources.
+
 ## Run entry schema
 ```md
 ## ITERATION N — <status> — <ISO timestamp>
