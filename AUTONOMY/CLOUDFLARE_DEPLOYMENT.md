@@ -53,3 +53,9 @@ A successful run must:
 Before editing product source, the primary loop must fetch the receipt for the current `main` SHA from the `deployment-records` branch. If the receipt is absent, mismatched, or does not show a passed smoke test, the baseline is not verified and product source must remain unchanged.
 
 The same rule applies to candidate verification after an iteration commit.
+
+## Authorization checkpoint
+
+- User confirmed on 2026-07-22 that both required GitHub Actions secrets were added.
+- This documentation-only commit intentionally triggers the first credentialed deployment pipeline.
+- Secret values remain unreadable to agents and must never be copied into repository content or logs.
