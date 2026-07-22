@@ -75,8 +75,47 @@ For each proposed technique, record:
 - **Acceptance:** visible improvement in crystalline material depth in captured before/after views; no critical scene identity regression; HDR failure falls back cleanly; added compressed transfer and decoded memory are recorded; mobile loading remains acceptable.
 - **Abandon condition:** reflections read as a literal snowy landscape, total startup cost is disproportionate, mobile memory becomes unstable, or the effect is not clearly better than procedural lighting.
 
+## Radar run — 2026-07-22 browser-verification gate
+
+### EXP-003 — Deterministic Playwright evidence matrix for the exact deployed SHA
+- **Status:** proposed as a CI/developer verification tool; it is not a production asset and does not enter the shipped bundle.
+- **Sources accessed 2026-07-22:**
+  - Official Playwright emulation documentation: https://playwright.dev/docs/emulation
+  - Official browser installation/documentation: https://playwright.dev/docs/browsers
+  - Official repository and license: https://github.com/microsoft/playwright and https://github.com/microsoft/playwright/blob/main/LICENSE
+- **Provider / author:** Microsoft and Playwright contributors.
+- **License / usage basis:** Apache License 2.0. Retain the license/notice with development dependencies; no in-product attribution is required because it is CI-only tooling.
+- **Repository problem:** Q-001 has an exact-SHA Cloudflare URL and HTTP smoke test, but desktop/mobile full-scroll behavior, touch emulation, console/page errors, reduced-motion behavior and screenshots remain unverified.
+- **Expected benefit:** produces repeatable evidence tied to a URL and SHA instead of ad-hoc visual claims; Playwright supports desktop/mobile device profiles, touch/mobile viewport behavior, `reducedMotion`, screenshots and browser event capture.
+- **Integration / format:** add `@playwright/test` as a development-only dependency after the primary loop accepts the tooling change; use Chromium first and store compact JSON evidence plus PNG screenshots as GitHub Actions artifacts. Browser binaries remain CI cache/runtime material and are never shipped in `dist`.
+- **File/payload impact:** zero production transfer increase. Development installation adds the Playwright package and a separately installed browser binary; exact disk/download size must be measured in the adopting run rather than guessed.
+- **Minimum experiment:** one test file against the immutable Cloudflare URL with three projects: desktop Chromium, a touch/mobile profile, and desktop Chromium with `reducedMotion: "reduce"`. Capture console errors, uncaught page errors, failed requests, initial/full-scroll/final screenshots and final scroll position.
+- **Fallback:** if Playwright installation or browser launch is unavailable, keep the manual browser audit as the evidence path; do not weaken Q-001 or infer a pass from the HTTP smoke test.
+- **Risk:** device emulation is not physical-device GPU testing; WebGL rendering can differ in headless/CI environments; screenshots may be nondeterministic because the scene uses animation or unseeded procedural generation.
+- **Acceptance:** each project reaches network idle or a defined application-ready condition; zero unexpected console/page errors; full-scroll reaches the intended final section; reduced-motion visibly suppresses non-essential scroll/camera animation; artifacts identify exact SHA, URL, viewport and timestamp.
+- **Abandon condition:** tests cannot distinguish app readiness from perpetual animation/network activity, WebGL is unavailable in the runner without an acceptable software-rendering path, or screenshots remain too nondeterministic to support comparisons.
+
+### EXP-004 — WebGL context-loss fault injection and recovery evidence
+- **Status:** proposed as a browser-only fault test supporting Q-001/Q-004; no external media or runtime library is required.
+- **Sources accessed 2026-07-22:**
+  - Khronos ratified `WEBGL_lose_context` specification: https://registry.khronos.org/webgl/extensions/WEBGL_lose_context/
+  - MDN `WEBGL_lose_context`: https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_lose_context
+  - MDN `prefers-reduced-motion`: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
+- **Provider / author:** Khronos WebGL Working Group; browser implementations; MDN documentation.
+- **License / usage basis:** browser-standard API and documentation reference; no downloadable asset or production dependency is introduced.
+- **Repository problem:** `ASSETS.md` records no verified non-WebGL fallback, and Q-001/Q-004 require loading/failure recovery evidence. A top-level HTTP 2xx cannot prove behavior when the GPU context is lost.
+- **Expected benefit:** verifies that typography/navigation remain available and that a controlled fallback or recovery message appears when rendering resources are destroyed; catches loops that continue throwing after context loss.
+- **Integration / format:** in a Playwright or manual DevTools session, obtain the canvas WebGL/WebGL2 context, request `WEBGL_lose_context`, call `loseContext()`, observe `webglcontextlost`, console state and DOM usability, then optionally call `restoreContext()` and wait for `webglcontextrestored`. Do not ship test controls in production UI.
+- **File/payload impact:** zero production transfer and zero external file size. Evidence is JSON/event timestamps plus before/lost/restored screenshots.
+- **Fallback:** when the extension is unavailable, record the test as unsupported and separately test WebGL context creation failure; never mark recovery as passed without an observed event or user-visible fallback.
+- **Risk:** Three.js may not recreate all resources automatically; forcing restoration can expose latent leaks or duplicate animation loops; the extension simulates context loss but not every GPU/driver failure mode.
+- **Minimum experiment:** lose context after the first stable frame, assert the page remains scrollable/readable, record whether rendering stops cleanly, then restore once and assert no duplicate canvas/RAF loop or repeated console error storm.
+- **Acceptance:** context-loss event is observed; navigation/editorial content remains usable; no uncontrolled exception loop occurs; either a clear fallback is shown or rendering restores exactly once; behavior is recorded for desktop and reduced-motion profiles.
+- **Abandon condition:** browser/renderer does not expose the extension in the verification environment, or the test requires invasive production hooks rather than browser-side evaluation.
+
 ## Current research backlog
-- Establish the verified live Cloudflare baseline before selecting visual techniques.
+- Complete exact-SHA desktop/mobile/reduced-motion/browser-error verification using EXP-003 or equivalent direct evidence.
+- Exercise WebGL context loss/failure behavior through EXP-004 before claiming resilience.
 - Camera rail and section-specific look targets rather than a single linear Y translation.
 - Scene-specific procedural identities using distinct geometry systems, not cloned cluster layouts.
 - GPU-friendly transition masks and depth-aware atmospheric effects.
