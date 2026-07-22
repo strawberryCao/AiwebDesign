@@ -17,9 +17,9 @@ permissions:
 
 jobs:
   deploy:
-    name: Build, deploy, verify, and record
+    name: Build, deploy, browser-audit, and record
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     environment:
       name: cloudflare-production
       url: ${{ steps.deploy.outputs.deployment-url }}
@@ -151,7 +151,7 @@ jobs:
             },
           };
 
-          async function upsert(path) {
+          async function upsert(path, value) {
             let currentSha;
             try {
               const current = await request(`${apiBase}/contents/${path}?ref=${encodeURIComponent(branch)}`);
@@ -162,7 +162,7 @@ jobs:
 
             const body = {
               message: `deploy: record ${sourceSha.slice(0, 12)}`,
-              content: Buffer.from(`${JSON.stringify(receipt, null, 2)}\n`).toString('base64'),
+              content: Buffer.from(`${JSON.stringify(value, null, 2)}\n`).toString('base64'),
               branch,
             };
             if (currentSha) body.sha = currentSha;
@@ -173,9 +173,146 @@ jobs:
             });
           }
 
-          await upsert(`AUTONOMY/deployments/${sourceSha}.json`);
-          await upsert('AUTONOMY/deployments/latest.json');
+          await upsert(`AUTONOMY/deployments/${sourceSha}.json`, receipt);
+          await upsert('AUTONOMY/deployments/latest.json', receipt);
           console.log(`Published deployment receipt for ${sourceSha}.`);
+          NODE
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run exact-SHA deployed browser audit
+        id: browser_audit
+        continue-on-error: true
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: npm run audit:browser
+
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-audit-${{ github.sha }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Publish immutable browser-audit receipt
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          AUDIT_STEP_OUTCOME: ${{ steps.browser_audit.outcome }}
+          AUDIT_ARTIFACT_NAME: browser-audit-${{ github.sha }}
+        shell: bash
+        run: |
+          node <<'NODE'
+          import fs from 'node:fs';
+
+          const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
+          const branch = 'deployment-records';
+          const sourceSha = process.env.GITHUB_SHA;
+          const apiBase = `https://api.github.com/repos/${owner}/${repo}`;
+          const auditPath = 'test-results/browser-audit/audit.json';
+          const headers = {
+            Accept: 'application/vnd.github+json',
+            Authorization: `Bearer ${process.env.GH_TOKEN}`,
+            'X-GitHub-Api-Version': '2022-11-28',
+            'Content-Type': 'application/json',
+          };
+
+          async function request(url, options = {}) {
+            const response = await fetch(url, {
+              ...options,
+              headers: { ...headers, ...(options.headers ?? {}) },
+            });
+            const text = await response.text();
+            const data = text ? JSON.parse(text) : null;
+            if (!response.ok) {
+              const error = new Error(`GitHub API ${response.status}: ${text}`);
+              error.status = response.status;
+              throw error;
+            }
+            return data;
+          }
+
+          let audit;
+          if (fs.existsSync(auditPath)) {
+            audit = JSON.parse(fs.readFileSync(auditPath, 'utf8'));
+          } else {
+            audit = {
+              schema_version: 1,
+              source_sha: sourceSha,
+              deployment_url: process.env.DEPLOYMENT_URL || null,
+              verified_at: new Date().toISOString(),
+              completed_at: new Date().toISOString(),
+              result: 'failed',
+              fatal_error: {
+                name: 'MissingAuditOutput',
+                message: `Browser audit step outcome was ${process.env.AUDIT_STEP_OUTCOME}; ${auditPath} was not produced.`,
+              },
+              scenarios: {},
+              webgl_recovery: null,
+              artifacts: {},
+            };
+          }
+
+          audit.source_sha = sourceSha;
+          audit.deployment_url = process.env.DEPLOYMENT_URL || audit.deployment_url || null;
+          audit.workflow_run_id = process.env.GITHUB_RUN_ID;
+          audit.workflow_run_attempt = Number(process.env.GITHUB_RUN_ATTEMPT);
+          audit.workflow_step_outcome = process.env.AUDIT_STEP_OUTCOME;
+          audit.artifact_name = process.env.AUDIT_ARTIFACT_NAME;
+          audit.workflow_run_url = `https://github.com/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+
+          async function upsert(path, value) {
+            let currentSha;
+            try {
+              const current = await request(`${apiBase}/contents/${path}?ref=${encodeURIComponent(branch)}`);
+              currentSha = current.sha;
+            } catch (error) {
+              if (error.status !== 404) throw error;
+            }
+
+            const body = {
+              message: `audit: record browser evidence ${sourceSha.slice(0, 12)}`,
+              content: Buffer.from(`${JSON.stringify(value, null, 2)}\n`).toString('base64'),
+              branch,
+            };
+            if (currentSha) body.sha = currentSha;
+
+            await request(`${apiBase}/contents/${path}`, {
+              method: 'PUT',
+              body: JSON.stringify(body),
+            });
+          }
+
+          await upsert(`AUTONOMY/browser-audits/${sourceSha}.json`, audit);
+          await upsert('AUTONOMY/browser-audits/latest.json', audit);
+          console.log(`Published browser-audit receipt for ${sourceSha}: ${audit.result}.`);
+          NODE
+
+      - name: Enforce browser-audit gate
+        if: always()
+        shell: bash
+        run: |
+          node <<'NODE'
+          import fs from 'node:fs';
+          const path = 'test-results/browser-audit/audit.json';
+          if (!fs.existsSync(path)) {
+            throw new Error(`Browser audit did not produce ${path}.`);
+          }
+          const audit = JSON.parse(fs.readFileSync(path, 'utf8'));
+          if (audit.source_sha !== process.env.GITHUB_SHA) {
+            throw new Error(`Browser audit SHA mismatch: ${audit.source_sha} != ${process.env.GITHUB_SHA}`);
+          }
+          if (audit.result !== 'passed') {
+            throw new Error(`Browser audit result is ${audit.result}; inspect the uploaded artifact and immutable receipt.`);
+          }
+          console.log(`Browser audit passed for ${audit.source_sha}.`);
           NODE
 
       - name: Report workflow result to issue 1
@@ -184,6 +321,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           JOB_STATUS: ${{ job.status }}
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          AUDIT_OUTCOME: ${{ steps.browser_audit.outcome }}
         shell: bash
         run: |
           node <<'NODE'
@@ -193,9 +331,11 @@ jobs:
           const sha = process.env.GITHUB_SHA;
           const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}`;
           const body = [
-            `### [DEPLOYMENT] ${status.toUpperCase()}`,
+            `### [DEPLOYMENT + BROWSER AUDIT] ${status.toUpperCase()}`,
             `- SHA: \`${sha}\``,
             `- URL: ${url}`,
+            `- Browser audit step: \`${process.env.AUDIT_OUTCOME || 'not-run'}\``,
+            `- Evidence artifact: \`browser-audit-${sha}\``,
             `- Workflow run: ${runUrl}`,
             `- Event: \`${process.env.GITHUB_EVENT_NAME}\``,
           ].join('\n');
