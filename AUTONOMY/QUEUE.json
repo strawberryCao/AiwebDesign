@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-22T17:30:00+09:00",
+  "selectionRule": "Choose one highest-value item supported by live evidence; never bundle unrelated items.",
+  "items": [
+    {
+      "id": "Q-001",
+      "title": "Establish verified Cloudflare baseline",
+      "status": "ready",
+      "priority": 100,
+      "expectedGain": "unblocks all evidence-based iteration",
+      "risk": "credentials or workflow unavailable",
+      "acceptance": [
+        "record exact main SHA",
+        "record real Cloudflare URL and HTTP status",
+        "inspect desktop and mobile",
+        "record console and full-scroll observations"
+      ]
+    },
+    {
+      "id": "Q-002",
+      "title": "Replace linear camera descent with authored camera rail",
+      "status": "blocked_by_Q-001",
+      "priority": 90,
+      "expectedGain": "major improvement to spatial storytelling and transitions",
+      "risk": "scroll desynchronization or motion sickness",
+      "acceptance": [
+        "distinct camera position and look target per scene",
+        "continuous interpolation without jumps",
+        "mobile and reduced-motion behavior verified"
+      ]
+    },
+    {
+      "id": "Q-003",
+      "title": "Create distinct procedural world identities",
+      "status": "blocked_by_Q-001",
+      "priority": 85,
+      "expectedGain": "reduces repeated-cluster appearance and improves project differentiation",
+      "risk": "GPU cost and visual incoherence",
+      "acceptance": [
+        "at least three visibly distinct procedural systems",
+        "shared art direction remains coherent",
+        "adaptive quality limits geometry cost"
+      ]
+    },
+    {
+      "id": "Q-004",
+      "title": "Add cinematic loading and failure recovery",
+      "status": "blocked_by_Q-001",
+      "priority": 80,
+      "expectedGain": "improves first impression and resilience",
+      "risk": "fake progress or delayed interaction",
+      "acceptance": [
+        "honest initialization progress or staged reveal",
+        "WebGL failure fallback",
+        "no content trap for reduced motion or mobile"
+      ]
+    },
+    {
+      "id": "Q-005",
+      "title": "Implement measured adaptive quality",
+      "status": "blocked_by_Q-001",
+      "priority": 75,
+      "expectedGain": "stabilizes visual quality across devices",
+      "risk": "quality oscillation or unreliable heuristics",
+      "acceptance": [
+        "bounded pixel ratio and effects tiers",
+        "particle or post-processing degradation path",
+        "no critical visual regression on desktop"
+      ]
+    }
+  ]
+}
