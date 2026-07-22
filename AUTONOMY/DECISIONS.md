@@ -33,7 +33,13 @@ Append-only architectural decisions. A reversal creates a new entry; do not rewr
 **Consequence:** Missing evidence produces `unknown` or `blocked`, never an invented score.
 
 ## ADR-006 — Original implementation boundary
-**Status:** accepted  
+**Status:** revised by ADR-007  
 **Decision:** Reference sites define quality and interaction principles only.  
 **Reason:** Their source, brands and assets are protected and unnecessary for an original reconstruction.  
 **Consequence:** Prefer procedural geometry, generated textures and original copy.
+
+## ADR-007 — Provenance-managed external assets
+**Status:** accepted  
+**Decision:** External models, HDRIs, textures, fonts, icons, audio, video, libraries, official samples and licensed stock assets may be used when they improve quality or iteration speed. Reference-site private bundles, brand copy, logos and files with unknown reuse rights remain excluded.  
+**Reason:** The user explicitly authorized broad use of external assets, while `AGENTS.md` now requires provenance, licensing basis, attribution, optimization and fallback records. The earlier blanket prohibition in durable memory no longer matched the active contract.  
+**Consequence:** Every non-trivial external asset must be registered in `AUTONOMY/ASSETS.md`; unknown-rights or undocumented assets cannot support a completion claim.
