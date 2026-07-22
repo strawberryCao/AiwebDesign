@@ -1,18 +1,16 @@
 {
   "schema_version": 1,
-  "source_sha": "3e7d8858d56ac2bf69b3d4ecd53a93fbfadf2d34",
+  "source_sha": "5bbc4a9bff1a1d31693884b7e90f2798b3aa3986",
   "source_ref": "refs/heads/main",
-  "workflow_run_id": "29915876549",
+  "workflow_run_id": "29916167376",
   "workflow_run_attempt": 1,
-  "deployed_at": "2026-07-22T11:29:56.373Z",
+  "deployed_at": "2026-07-22T11:34:11.474Z",
   "deployment_url": "https://aiwebdesign-polar-index.caoheming139.workers.dev",
-  "worker_name": "aiwebdesign-polar-index",
-  "version_id": "258f0c8c-1f19-41a6-a8ff-bb24d211efd2",
   "build": {
     "install": "npm install --no-audit --no-fund",
     "check": "npm run check",
     "command": "npm run build",
-    "deploy": "npx wrangler deploy",
+    "deploy": "cloudflare/wrangler-action@v3 command=deploy",
     "smoke_test": "passed"
   }
 }
