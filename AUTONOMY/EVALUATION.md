@@ -12,7 +12,7 @@
 | Accessibility and recovery | 5 | Reduced-motion behavior, keyboard/semantic basics, loading and failure fallback |
 
 ## Scoring rules
-- A dimension with no direct evidence is `unknown`, not full credit.
+- A dimension with no direct evidence is unknown, not full credit.
 - Builder self-score and independent critic score are recorded separately.
 - The accepted score is the lower evidence-supported score when they differ without resolution.
 - A critical deployment, console, navigation or accessibility failure caps the total at 70.
@@ -20,8 +20,17 @@
 
 ## History
 
+### Independent audit — 2026-07-22 19:27 +08:00
+- Repository head: b8da7f9c1549fac45da997c6b78576c0c806ccfe.
+- Candidate SHA / URL: none. No deployment-records branch or SHA-bound deployment receipt was available.
+- Evidence: deployment workflow and receipt contract exist, but no successful Cloudflare receipt, public URL, smoke-test result, desktop/mobile browser evidence, console evidence, reduced-motion evidence or asset-loading evidence exists for the current head.
+- Independent critic score: unknown for every dimension.
+- Accepted score: unknown.
+- Regressions: not assessable.
+- Decision: blocked until an exact commit SHA is tied to a live Cloudflare URL with a passed smoke test.
+
 ### Iteration 1 — 2026-07-22
-- Objective: establish a verified Cloudflare baseline for exact `main` SHA `c01b00362e3418c3e8836b161b7a10fd61bda45f`.
+- Objective: establish a verified Cloudflare baseline for exact main SHA c01b00362e3418c3e8836b161b7a10fd61bda45f.
 - Baseline SHA / URL: SHA observed; URL unavailable and deployment identity unverified.
 - Candidate SHA / URL: none.
 - Evidence: no combined GitHub status checks; no callable Cloudflare deployment context, canonical URL, HTTP result or browser evidence.
@@ -40,15 +49,13 @@
 - Result: blocked pending first verified Cloudflare baseline
 
 ## Entry template
-```md
-### Iteration N — YYYY-MM-DD
-- Objective:
-- Baseline SHA / URL:
-- Candidate SHA / URL:
-- Evidence:
-- Builder score:
-- Independent critic score:
-- Accepted score:
-- Regressions:
-- Decision: pass | continue | rollback | blocked
-```
+- Iteration and date
+- Objective
+- Baseline SHA and URL
+- Candidate SHA and URL
+- Evidence
+- Builder score
+- Independent critic score
+- Accepted score
+- Regressions
+- Decision
