@@ -8,7 +8,7 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - The implementation and product identity must remain original. Recreate interaction principles and perceived quality, not protected brand identity or private source bundles.
 - Suitable external assets are encouraged when they materially improve quality or iteration speed, provided their provenance and usage basis are recorded.
 - The system should improve autonomously in two-hour cycles and persist all useful memory in this repository.
-- The user requires every AiwebDesign autonomous role to remain on **GPT-5.6 sol**. The system must not intentionally change, downgrade, rotate or auto-select another model.
+- The user classifies this as a highly complex task and requires every AiwebDesign autonomous role to use **GPT-5.6 Sol High** (高级模式 / extended reasoning). The system must not intentionally use Instant or Medium, change models, downgrade, rotate or auto-select another model.
 
 ## Product identity
 - Working title: **Polar Index**.
@@ -23,11 +23,12 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - Keep short-term hypotheses separate from long-term memory.
 - Evidence must include commit identity, deployment identity and observable verification; unsupported claims are not memory.
 - Treat external-asset provenance, licensing basis, attribution, optimization and fallback as part of production quality rather than optional documentation.
-- Model selection is a user-owned invariant, not an optimization target for critics, curators, guards, technical research or future prompts.
+- Model and reasoning-level selection are user-owned invariants, not optimization targets for critics, curators, guards, technical research or future prompts.
 - The canonical Cloudflare deployment path is GitHub Actions plus an immutable receipt on `deployment-records`; a deployment is accepted only when the receipt matches the exact source SHA and records a passed smoke test. This path was locally verified for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`.
 
 ## Hard constraints
-- Use GPT-5.6 sol for all AiwebDesign autonomous roles and do not intentionally switch models.
+- Use GPT-5.6 Sol High for all AiwebDesign autonomous roles. Do not intentionally use Instant or Medium, switch models or reduce reasoning effort.
+- If the runtime cannot expose or guarantee its task model/reasoning level, state that limitation honestly rather than asserting compliance without evidence.
 - Do not extract or republish reference-site private source bundles, brand copy, logos or files whose reuse rights are unknown.
 - Register every non-trivial external asset in `AUTONOMY/ASSETS.md` before it can support a completion claim.
 - No source edit while another valid primary lease exists.
