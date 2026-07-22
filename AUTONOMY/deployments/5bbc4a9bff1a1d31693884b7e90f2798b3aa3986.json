@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "source_sha": "5bbc4a9bff1a1d31693884b7e90f2798b3aa3986",
+  "source_ref": "refs/heads/main",
+  "workflow_run_id": "29916167376",
+  "workflow_run_attempt": 1,
+  "deployed_at": "2026-07-22T11:34:11.474Z",
+  "deployment_url": "https://aiwebdesign-polar-index.caoheming139.workers.dev",
+  "build": {
+    "install": "npm install --no-audit --no-fund",
+    "check": "npm run check",
+    "command": "npm run build",
+    "deploy": "cloudflare/wrangler-action@v3 command=deploy",
+    "smoke_test": "passed"
+  }
+}
