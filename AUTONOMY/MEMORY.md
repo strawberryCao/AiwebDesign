@@ -24,6 +24,7 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - Evidence must include commit identity, deployment identity and observable verification; unsupported claims are not memory.
 - Treat external-asset provenance, licensing basis, attribution, optimization and fallback as part of production quality rather than optional documentation.
 - Model selection is a user-owned invariant, not an optimization target for critics, curators, guards, technical research or future prompts.
+- The canonical Cloudflare deployment path is GitHub Actions plus an immutable receipt on `deployment-records`; a deployment is accepted only when the receipt matches the exact source SHA and records a passed smoke test. This path was locally verified for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`.
 
 ## Hard constraints
 - Use GPT-5.6 sol for all AiwebDesign autonomous roles and do not intentionally switch models.
