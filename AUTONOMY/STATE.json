@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "projectId": "strawberryCao/AiwebDesign",
   "iteration": 0,
-  "phase": "idle",
+  "phase": "blocked",
   "lease": {
     "owner": null,
     "iteration": null,
@@ -35,13 +35,14 @@
     "criticalRegression": null
   },
   "nextObjectiveId": "Q-001",
-  "lastCheckpoint": "memory-v2-provenance-corrected",
-  "lastSuccessfulStep": "memory-curation",
+  "lastCheckpoint": "governance-baseline-blocked",
+  "lastSuccessfulStep": "governance-audit",
   "rollbackCommit": null,
   "blockers": [
-    "Cloudflare credentials, canonical deployment URL and first successful live deployment have not been verified",
-    "Canonical license records and production loading behavior for Google Fonts, Three.js and GSAP remain to be verified"
+    "Cloudflare credentials/project access, canonical deployment URL and first successful live deployment tied to the exact current main SHA have not been verified",
+    "The current main head has no successful GitHub status checks or Cloudflare deployment evidence",
+    "Canonical license/author records, introduction commits and production loading/fallback behavior for Google Fonts, Three.js and GSAP remain to be verified"
   ],
   "memoryVersion": 2,
-  "updatedAt": "2026-07-22T17:48:28+08:00"
+  "updatedAt": "2026-07-22T18:14:21+08:00"
 }
