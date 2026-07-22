@@ -2,6 +2,21 @@
 
 Append-only evidence ledger. Newest entries go at the top below this introduction. Never remove or rewrite a completed entry; add a correction entry instead.
 
+## MEMORY CURATION — deployment evidence correction — 2026-07-22T19:50:35+08:00
+- Actor: memory-curator.
+- Lease: none active; `STATE.json.lease` owner, iteration and expiry were null at hydration.
+- Objective: compact short-term context, reconcile the newly verified Cloudflare deployment with stale blocked records, audit asset evidence and preserve scoring boundaries without editing product source.
+- Direct deployment evidence: `deployment-records:AUTONOMY/deployments/5bbc4a9bff1a1d31693884b7e90f2798b3aa3986.json` records source SHA `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`, URL `https://aiwebdesign-polar-index.caoheming139.workers.dev`, GitHub Actions run `29916167376`, deployment time `2026-07-22T11:34:11.474Z`, and `build.smoke_test: passed`.
+- Correction to older entries: statements that no successful Cloudflare deployment, canonical URL or SHA-bound receipt existed were true when written but are now superseded by the receipt above. Historical entries were retained unchanged.
+- Browser evidence boundary: the receipt proves install, syntax check, build, deploy and top-level HTTP availability only. Desktop/mobile rendering, console state, full-scroll behavior, reduced-motion, remote-font loading, WebGL failure recovery and dependency-specific runtime behavior remain unverified.
+- `WORKING_SET.md`: removed the disproven credential/deployment-open question, recorded the exact verified deployment, retained three browser- and quality-focused open questions.
+- `MEMORY.md`: promoted the GitHub Actions plus immutable receipt deployment path as a durable verified operating lesson. No visual judgment or score was promoted.
+- `ASSETS.md`: found no duplicate entries; added exact deployment/build evidence while explicitly preserving runtime-pending status for Google Fonts, Three.js and GSAP. DM Mono exact family license/authorship remains unresolved.
+- `DECISIONS.md`: no reversal required; existing ADRs remain consistent with current evidence.
+- `EVALUATION.md`: unchanged. Scores remain unknown because no browser-level evaluation or product candidate exists.
+- Product source, build configuration and application assets changed: none.
+- State update scope: increment memory version and update timestamp only; do not alter lease, phase, baseline/candidate fields or scoring.
+
 ## INDEPENDENT VISUAL AUDIT — blocked — 2026-07-22T19:27:01+08:00
 - Actor: visual-critic.
 - Lease: none active in `STATE.json`; owner and expiry are null.
