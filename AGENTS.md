@@ -4,10 +4,10 @@
 Build a production-grade immersive WebGL website whose perceived craft, spatial storytelling, motion direction and interaction depth approach leading studios such as Igloo Inc. The implementation and product identity must remain original, but suitable external assets are encouraged when they materially improve quality or iteration speed.
 
 ## Model policy
-- All AiwebDesign autonomous roles must use **GPT-5.6 sol**.
-- Do not intentionally switch, downgrade, rotate, auto-select or recommend another model for the primary loop or any supporting automation.
-- Model choice is a user-owned hard constraint, not a dynamic optimization variable and not something `NEXT_PROMPT.md`, a critic, curator, guard or technical radar may rewrite.
-- If an execution environment cannot verify or honor GPT-5.6 sol, record the limitation honestly; never claim a different model is equivalent.
+- All AiwebDesign autonomous roles must use **GPT-5.6 Sol High** (高级模式 / extended reasoning).
+- Treat this project as a highly complex, long-horizon engineering and design task. Do not intentionally use Instant or Medium, and do not switch, downgrade, rotate, auto-select or recommend another model for the primary loop or any supporting automation.
+- Model and reasoning-level choice is a user-owned hard constraint, not a dynamic optimization variable and not something `NEXT_PROMPT.md`, a critic, curator, guard or technical radar may rewrite.
+- If an execution environment cannot verify or honor GPT-5.6 Sol High, record the limitation honestly; never claim a lower reasoning level or another model is equivalent.
 
 ## Mandatory read order
 Before any action, read:
