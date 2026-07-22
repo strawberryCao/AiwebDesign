@@ -1,45 +1,80 @@
-# Next Objective — Iteration 1
+# Next Objective — Iteration 3
 
 ## Objective ID
-`Q-001`
+`Q-006`
 
 ## Measurable objective
-Establish the first trustworthy Cloudflare baseline for the exact current `main` SHA. Do not edit product source until the untouched baseline has been deployed or matched to an existing deployment and inspected.
+Replace the active Google Fonts hotlink with a controlled, self-hosted font set while preserving the current editorial hierarchy and measurable layout behavior. Complete this as one coherent dependency-and-typography batch; do not combine it with camera, geometry, HDRI, loading-screen or adaptive-quality work.
 
-If and only if baseline verification succeeds and enough execution time remains, select exactly one live-observed, high-impact defect and implement one coherent improvement batch. Prefer camera choreography only when the live audit confirms that the current linear descent is the dominant quality limiter.
+## Baseline evidence gate
+Before editing product source, identify the exact current `main` SHA and fetch both immutable receipts from `deployment-records`:
 
-## Required evidence before editing
-- exact baseline commit SHA;
-- real Cloudflare deployment URL and deployment/build evidence;
-- HTTP success status;
-- desktop full-scroll inspection;
-- mobile full-scroll inspection;
-- console-error observation;
-- reduced-motion or fallback observation.
+- `AUTONOMY/deployments/<main-sha>.json`
+- `AUTONOMY/browser-audits/<main-sha>.json`
 
-## Allowed product scope after baseline passes
-- `src/main.js`
+Proceed only when both receipts match the exact SHA and public URL, deployment `build.smoke_test` is `passed`, and browser audit `result` is `passed`. The ChatGPT automation runtime does not need direct access to `workers.dev`; GitHub Actions Playwright is the canonical functional browser evidence path. Use the uploaded screenshots/report for visual comparison when available.
+
+## Product and asset scope
 - `src/style.css`
-- `index.html` only when required by the selected coherent batch
-- dependency or asset changes only when they are necessary for the selected batch and are documented in `AUTONOMY/ASSETS.md`
+- a controlled local font directory such as `public/fonts/**`
+- `package.json` only when a verified font package is needed to source files reproducibly
+- `AUTONOMY/ASSETS.md`
+- standard autonomy evidence files required by the closed loop
 
-## External asset gate
-External models, HDRIs, textures, fonts, icons, audio, video, libraries and stock media may be used when they materially improve the result. Before accepting a candidate that introduces or materially changes an external asset, update `AUTONOMY/ASSETS.md` with its canonical source, author/provider, license or usage basis, attribution requirement, project path or controlled URL, optimization, loading/error fallback, introducing commit and shipped verification evidence. Do not use fragile undocumented hotlinks or files whose reuse rights are unknown.
+Do not edit WebGL scene behavior, camera choreography, geometry, particles, lighting, copy or page structure unless a strictly necessary font-loading fallback requires a minimal CSS adjustment.
+
+## Asset provenance gate
+Before shipping any font file, record in `AUTONOMY/ASSETS.md`:
+
+- canonical family and package/source;
+- author/provider;
+- exact license or usage basis and attribution requirement;
+- downloaded source version and project path;
+- original and shipped WOFF2 sizes;
+- retained weights/subsets and removed files;
+- CSS loading strategy and system-font fallback;
+- introducing commit and exact-SHA browser verification.
+
+Do not infer DM Mono licensing from another DM family. If its exact source/license cannot be established, replace it with a metrically acceptable verified alternative or retain a system monospace fallback; do not vendor an uncertain file.
+
+## Implementation constraints
+- Prefer local WOFF2 files and only the weights actually used by the current CSS.
+- Use `font-display: swap` or an equivalently resilient strategy.
+- Remove all runtime requests to `fonts.googleapis.com` and `fonts.gstatic.com`.
+- Preserve readable fallback stacks if local font loading fails.
+- Avoid a font package or asset set whose transfer size is disproportionate to the visual benefit.
+
+## Validation
+Run:
+
+- `npm install --no-audit --no-fund`
+- `npm run check`
+- `npm run build`
+
+After the `iter-3: self-host and audit active fonts` commit is deployed, require matching deployment and browser-audit receipts for the candidate SHA. Verify:
+
+- desktop, mobile and reduced-motion browser scenarios pass;
+- no document, script, stylesheet or font request fails;
+- no request targets Google Fonts hosts;
+- panel count, full-scroll completion, WebGL context and interactions remain intact;
+- title wrapping, key text alignment and mobile overflow do not regress in screenshots;
+- fallback remains usable when local font requests are deliberately blocked or renamed in a controlled test.
 
 ## Acceptance
-- baseline evidence is written to `STATE.json`, `RUN_LOG.md` and `EVALUATION.md`;
-- any product change passes syntax check and production build;
-- candidate is deployed and compared with the baseline;
-- no critical mobile, console, navigation, accessibility, licensing, asset-loading or performance regression;
-- all important external assets introduced or changed in the candidate are represented accurately in `ASSETS.md`;
-- the next objective is rewritten from observed evidence, not aspiration.
+- baseline and candidate evidence are tied to exact SHAs;
+- active font files have verified provenance and usage rights;
+- Google font hotlinks are eliminated;
+- shipped font payload is bounded and documented;
+- desktop/mobile/reduced-motion audit remains passed;
+- no critical typography, loading, licensing, console, navigation, WebGL or performance regression;
+- `ASSETS.md`, `RUN_LOG.md`, `EVALUATION.md`, `WORKING_SET.md`, `QUEUE.json`, `NEXT_PROMPT.md` and `STATE.json` are updated in contract order.
 
 ## Stop conditions
-- Missing or invalid Cloudflare credentials/access: record blocker, release lease and make no product edits.
-- Active non-expired lease: skip.
-- Ambiguous deployment-to-commit identity: mark blocked; do not guess.
-- Failed build: do not push.
-- Missing or unverifiable asset source/usage basis for a newly introduced asset: do not accept the candidate; replace or remove the asset.
+- Active non-expired primary lease: skip.
+- Missing or mismatched exact-SHA deployment/browser receipt: do not edit product source.
+- Unknown font license or source: do not vendor that file.
+- Failed install, syntax check or production build: do not push.
+- Candidate browser audit failure or material typography regression: reject or roll back the candidate and record the evidence.
 
-## Originality and provenance boundary
-Use Igloo Inc. and other reference sites as public visual/interaction quality references. Build an original product identity and implementation. Suitable external assets are allowed when their provenance and usage basis are recorded; do not extract private source bundles, brand copy, logos or unknown-rights files from reference sites.
+## Originality and model boundary
+Use **GPT-5.6 Sol High** as required by `AGENTS.md`. Preserve the original Polar Index identity; font sourcing is an infrastructure and typography-quality improvement, not permission to copy branding or proprietary assets.
