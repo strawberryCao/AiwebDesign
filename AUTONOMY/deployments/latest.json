@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "source_sha": "9abe3d0368600f7b55c3faafa62a8e0b5c7a2457",
+  "source_sha": "3e7d8858d56ac2bf69b3d4ecd53a93fbfadf2d34",
   "source_ref": "refs/heads/main",
-  "workflow_run_id": "29915856712",
+  "workflow_run_id": "29915876549",
   "workflow_run_attempt": 1,
-  "deployed_at": "2026-07-22T11:29:25.925Z",
+  "deployed_at": "2026-07-22T11:29:56.373Z",
   "deployment_url": "https://aiwebdesign-polar-index.caoheming139.workers.dev",
   "worker_name": "aiwebdesign-polar-index",
-  "version_id": "95eb3152-9074-4f9e-b647-832aacde8c9e",
+  "version_id": "258f0c8c-1f19-41a6-a8ff-bb24d211efd2",
   "build": {
     "install": "npm install --no-audit --no-fund",
     "check": "npm run check",
