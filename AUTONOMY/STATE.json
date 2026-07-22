@@ -35,12 +35,13 @@
     "criticalRegression": null
   },
   "nextObjectiveId": "Q-001",
-  "lastCheckpoint": "architecture-v2-initialized",
-  "lastSuccessfulStep": null,
+  "lastCheckpoint": "memory-v2-provenance-corrected",
+  "lastSuccessfulStep": "memory-curation",
   "rollbackCommit": null,
   "blockers": [
-    "Cloudflare credentials, canonical deployment URL and first successful live deployment have not been verified"
+    "Cloudflare credentials, canonical deployment URL and first successful live deployment have not been verified",
+    "Canonical license records and production loading behavior for Google Fonts, Three.js and GSAP remain to be verified"
   ],
-  "memoryVersion": 1,
-  "updatedAt": "2026-07-22T17:30:00+09:00"
+  "memoryVersion": 2,
+  "updatedAt": "2026-07-22T17:48:28+08:00"
 }
