@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "projectId": "strawberryCao/AiwebDesign",
   "iteration": 2,
-  "phase": "blocked_browser_runtime_policy",
+  "phase": "idle",
   "lease": {
     "owner": null,
     "iteration": null,
@@ -15,11 +15,11 @@
     "consecutivePassingRounds": 0
   },
   "baseline": {
-    "commitSha": "d228f1acd0164e1af37a6a1b881305de10dc207f",
+    "commitSha": "d22c6e8b2664965696ff7b02c792e6e1965f5fb2",
     "deploymentUrl": "https://aiwebdesign-polar-index.caoheming139.workers.dev",
-    "deploymentId": "github-actions-run-29922376480",
-    "verifiedAt": "2026-07-22T13:06:12.927Z",
-    "httpStatus": "smoke-test-passed"
+    "deploymentId": "github-actions-run-29924558425",
+    "verifiedAt": "2026-07-22T13:41:51.361Z",
+    "httpStatus": "deployment-and-browser-audit-passed"
   },
   "candidate": {
     "commitSha": null,
@@ -34,16 +34,11 @@
     "acceptedScore": null,
     "criticalRegression": null
   },
-  "nextObjectiveId": "Q-001",
-  "lastCheckpoint": "iteration-2-browser-runtime-policy-blocked",
-  "lastSuccessfulStep": "exact-main-sha-deployment-receipt-and-smoke-test-verified",
-  "rollbackCommit": "d228f1acd0164e1af37a6a1b881305de10dc207f",
-  "blockers": [
-    "The automation runtime can launch system Chromium but outbound navigation to the verified workers.dev baseline is denied by the environment with net::ERR_BLOCKED_BY_ADMINISTRATOR",
-    "Playwright-managed Chromium download is also unavailable because the runtime cannot resolve the Playwright CDN hosts",
-    "Desktop, mobile, console, full-scroll, reduced-motion, dependency-loading and WebGL recovery evidence therefore cannot be collected in this runtime",
-    "Product source editing remains prohibited until browser evidence is collected against the exact deployed main SHA"
-  ],
+  "nextObjectiveId": "Q-006",
+  "lastCheckpoint": "iteration-2-exact-sha-browser-baseline-verified",
+  "lastSuccessfulStep": "deployment-and-browser-audit-receipts-passed",
+  "rollbackCommit": "d22c6e8b2664965696ff7b02c792e6e1965f5fb2",
+  "blockers": [],
   "memoryVersion": 3,
-  "updatedAt": "2026-07-22T21:05:42+08:00"
+  "updatedAt": "2026-07-22T22:41:51+09:00"
 }
