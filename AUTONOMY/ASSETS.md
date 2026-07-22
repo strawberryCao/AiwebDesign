@@ -34,15 +34,15 @@ Unknown-rights files copied from reference websites are not acceptable substitut
   - Runtime stylesheet: `https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap`
   - Inter canonical license: `https://github.com/google/fonts/blob/main/ofl/inter/OFL.txt`
   - Google Fonts source/licensing repository: `https://github.com/google/fonts`
-- **License / usage basis:** Inter is verified as SIL Open Font License 1.1. Google Fonts documents that each family directory carries its specific license. The exact DM Mono family directory, author record and license file were not conclusively resolved in this radar run and remain pending; do not infer them from another DM family.
+- **License / usage basis:** Inter is verified as SIL Open Font License 1.1. Google Fonts documents that each family directory carries its specific license. The exact DM Mono family directory, author record and license file remain unresolved; do not infer them from another DM family.
 - **Attribution requirement:** Inter OFL requires retention of the copyright notice and license when redistributing the font software; no visible in-product credit is established as mandatory. DM Mono requirements remain pending exact-family verification.
 - **Project location:** `src/style.css` first-line remote `@import`
 - **Optimization:** remote CSS/font loading; no local subset, preload or self-hosted package is recorded
 - **Fallback:** CSS falls back to `sans-serif` and `monospace`
 - **Introduced by:** bootstrap implementation; exact introducing commit not yet identified
-- **Verification:** static source verified; Inter license verified on 2026-07-22; DM Mono exact license/authorship and production loading/caching/failure behavior remain unverified
+- **Verification:** static source verified; Inter license verified on 2026-07-22. The exact-SHA production page passed a top-level HTTP smoke test for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`, but that does not prove the Google Fonts requests succeeded or that fallback behavior was exercised. DM Mono exact license/authorship and browser-level production loading/caching/failure behavior remain unverified.
 - **Status:** needs_review
-- **Planned remediation:** EXP-001 in `RESEARCH.md` proposes package-level verified self-hosting through Fontsource after Q-001.
+- **Planned remediation:** EXP-001 in `RESEARCH.md` proposes package-level verified self-hosting after browser baseline verification.
 
 ### ASSET-002 — Three.js 0.185.1
 - **Type:** library
@@ -56,7 +56,7 @@ Unknown-rights files copied from reference websites are not acceptable substitut
 - **Optimization:** bundled by Vite; renderer pixel ratio is capped, but production bundle size and code splitting are unverified
 - **Fallback:** no verified non-WebGL application fallback beyond page-level HTML/CSS
 - **Introduced by:** bootstrap implementation; exact introducing commit not yet identified
-- **Verification:** static imports and pinned version verified; canonical MIT license verified on 2026-07-22; production load and fallback remain pending
+- **Verification:** static imports and pinned version verified; canonical MIT license verified on 2026-07-22. Build and top-level production smoke test passed for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`, but WebGL initialization, rendered-scene behavior and failure fallback remain pending direct browser verification.
 - **Status:** license_verified_runtime_pending
 
 ### ASSET-003 — GSAP 3.15.0 and ScrollTrigger
@@ -71,15 +71,15 @@ Unknown-rights files copied from reference websites are not acceptable substitut
 - **Optimization:** bundled by Vite; ScrollTrigger registration is skipped for reduced-motion users
 - **Fallback:** reduced-motion path avoids ScrollTrigger registration; full no-JavaScript behavior remains unverified
 - **Introduced by:** bootstrap implementation; exact introducing commit not yet identified
-- **Verification:** static imports and pinned version verified; canonical repository and standard-license basis verified on 2026-07-22; production behavior and fallback remain pending
+- **Verification:** static imports and pinned version verified; canonical repository and standard-license basis verified on 2026-07-22. Build and top-level production smoke test passed for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`, but scroll animation, reduced-motion and no-JavaScript fallback behavior remain pending browser verification.
 - **Status:** license_verified_runtime_pending
 
 ## Candidate assets
 No external model, HDRI, texture, icon, audio or video has entered a candidate build. `RESEARCH.md` EXP-002 records Poly Haven `Snow Field` as a researched CC0 HDRI candidate only; it must not be promoted here until selected and downloaded for an actual candidate build.
 
 ## Curator and radar findings
-- The previous statement that no external project assets were registered was inconsistent with source evidence: hosted Google Fonts, Three.js and GSAP are active dependencies.
 - No duplicate active asset entries were found.
-- Three.js and GSAP licensing bases are now canonically recorded; their production loading/fallback behavior remains unverified.
-- Inter licensing is now recorded; DM Mono exact family authorship/license remains unresolved and blocks ASSET-001 from verified status.
-- Before completion, identify introduction commits, vendor required notices, verify production loading/fallback behavior, and either verify DM Mono exactly or replace/self-host it through a package carrying auditable metadata.
+- The production deployment receipt proves install, syntax check, build, deploy and top-level HTTP availability for exact commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`; it does not prove each runtime dependency or remote font request loaded successfully.
+- Three.js and GSAP licensing bases are canonically recorded; browser-level production loading/fallback behavior remains unverified.
+- Inter licensing is recorded; DM Mono exact family authorship/license remains unresolved and blocks ASSET-001 from verified status.
+- Before completion, identify introduction commits, retain required notices, verify production loading/fallback behavior, and either verify DM Mono exactly or replace/self-host it through a package carrying auditable metadata.
