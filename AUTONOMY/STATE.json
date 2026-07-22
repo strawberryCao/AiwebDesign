@@ -1,12 +1,46 @@
 {
+  "schemaVersion": 2,
+  "projectId": "strawberryCao/AiwebDesign",
   "iteration": 0,
-  "expectationScore": 92,
-  "consecutivePassingRoundsRequired": 2,
-  "consecutivePassingRounds": 0,
-  "phase": "bootstrap",
-  "lastBaselineCommit": null,
-  "lastDeploymentUrl": null,
-  "lastScore": null,
-  "blockers": ["Cloudflare credentials and first successful deployment have not been verified"],
-  "updatedAt": "2026-07-22T17:00:00+09:00"
+  "phase": "idle",
+  "lease": {
+    "owner": null,
+    "iteration": null,
+    "acquiredAt": null,
+    "expiresAt": null
+  },
+  "target": {
+    "expectationScore": 92,
+    "consecutivePassingRoundsRequired": 2,
+    "consecutivePassingRounds": 0
+  },
+  "baseline": {
+    "commitSha": null,
+    "deploymentUrl": null,
+    "deploymentId": null,
+    "verifiedAt": null,
+    "httpStatus": null
+  },
+  "candidate": {
+    "commitSha": null,
+    "deploymentUrl": null,
+    "deploymentId": null,
+    "verifiedAt": null,
+    "httpStatus": null
+  },
+  "evaluation": {
+    "builderScore": null,
+    "independentScore": null,
+    "acceptedScore": null,
+    "criticalRegression": null
+  },
+  "nextObjectiveId": "Q-001",
+  "lastCheckpoint": "architecture-v2-initialized",
+  "lastSuccessfulStep": null,
+  "rollbackCommit": null,
+  "blockers": [
+    "Cloudflare credentials, canonical deployment URL and first successful live deployment have not been verified"
+  ],
+  "memoryVersion": 1,
+  "updatedAt": "2026-07-22T17:30:00+09:00"
 }
