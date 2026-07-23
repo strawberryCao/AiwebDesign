@@ -13,13 +13,15 @@ Build a production-grade immersive WebGL website whose perceived craft, spatial 
 Before any action, read:
 1. `AGENTS.md`
 2. `AUTONOMY/STATE.json`
-3. `AUTONOMY/NEXT_PROMPT.md`
-4. `AUTONOMY/WORKING_SET.md`
-5. `AUTONOMY/MEMORY.md`
-6. `AUTONOMY/EVALUATION.md`
-7. `AUTONOMY/DECISIONS.md`
-8. `AUTONOMY/ASSETS.md`
-9. the latest entries in `AUTONOMY/RUN_LOG.md`
+3. `AUTONOMY/STATE_MACHINE.md`
+4. `AUTONOMY/QUEUE.json`
+5. `AUTONOMY/NEXT_PROMPT.md`
+6. `AUTONOMY/WORKING_SET.md`
+7. `AUTONOMY/MEMORY.md`
+8. `AUTONOMY/EVALUATION.md`
+9. `AUTONOMY/DECISIONS.md`
+10. `AUTONOMY/ASSETS.md`
+11. the latest entries in `AUTONOMY/RUN_LOG.md`
 
 ## External asset policy
 - External models, HDRIs, textures, fonts, icons, audio, video, libraries and stock media may be used aggressively when they raise visual quality.
@@ -50,6 +52,13 @@ Do not deliberately split work that can finish safely in one run. However, a rea
 - If a problem cannot be solved in the current run, create or update a concrete queue item with owner, direct evidence, next action, acceptance condition and escalation condition. A single failed step is a recoverable checkpoint, not permission to repeat a generic refusal in later runs.
 - The primary controller and health/recovery guard may inspect and update the project's scheduled automations when prompts, schedules, tool-loading instructions or role boundaries are demonstrably causing repeated empty runs. Do not wait for user intervention to repair an automation fault.
 - Notify the user only for a proven new permission requirement, an irreversible product-direction decision, a paid/licensed asset purchase, or a credible security/legal risk.
+
+## Executable queue state
+- `AUTONOMY/STATE_MACHINE.md` defines the allowed queue statuses, transitions, retry accounting, anti-loop escalation and CI checkpoint behavior.
+- `AUTONOMY/QUEUE.json` is executable state, not a suggestion list. Every open item must have an owner, direct evidence, one concrete next action, acceptance and abandon conditions, attempt accounting and a strategy version.
+- Resume `STATE.json.controlPlane.activeItemId`, an exact candidate SHA or the last checkpoint before selecting unrelated work.
+- Three materially equivalent failures prohibit a fourth identical attempt. Change strategy, toolchain, validation route, branch, artifact or owner and record the difference.
+- Before ending a primary or guard run, govern the entire queue: merge duplicates, close complete work, abandon obsolete work with evidence, split oversized failures, reassign stalled items and synchronize `QUEUE.json.activeItemId`, `STATE.json.nextObjectiveId` and `NEXT_PROMPT.md`.
 
 ## Cloudflare deployment evidence
 - `.github/workflows/deploy-cloudflare.yml` is the canonical production deployment path.
