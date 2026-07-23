@@ -30,6 +30,8 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - A real asynchronous boundary or verified tool failure is a recoverable checkpoint. Persist the exact SHA/state, direct error evidence, owner, next executable action and acceptance criteria; resume it in the next cycle before starting unrelated work.
 - Never declare GitHub/MCP or another connected capability unavailable solely because its schema is not already visible. Load the connector, make a real call, correct parameters and retry once, then use an applicable fallback such as repository fetch, public clone or Actions logs.
 - Repeated generic refusals without real tool evidence are automation faults. The primary controller and health/recovery guard are authorized to inspect and repair scheduled automation prompts, schedules and role boundaries without waiting for user intervention.
+- Project execution state belongs in `AUTONOMY/STATE_MACHINE.md`, `QUEUE.json`, `STATE.json` and `NEXT_PROMPT.md`, not in an ever-growing automation prompt. Every open item must be executable and evidence-backed; the queue is governed as a state machine across runs.
+- Three materially equivalent evidence-backed failures require a strategy change before another attempt. Repeating the same failed path a fourth time is a control-plane defect, not persistence.
 
 ## Hard constraints
 - Use GPT-5.6 Sol High for all AiwebDesign autonomous roles. Do not intentionally use Instant or Medium, switch models or reduce reasoning effort.
