@@ -8,6 +8,8 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - The implementation and product identity must remain original. Recreate interaction principles and perceived quality, not protected brand identity or private source bundles.
 - Suitable external assets are encouraged when they materially improve quality or iteration speed, provided their provenance and usage basis are recorded.
 - The system should improve autonomously in two-hour cycles and persist all useful memory in this repository.
+- This is a long-horizon project. A single run should deliver one coherent verified advance and persist unfinished chains for later runs rather than treating incomplete work as terminal failure.
+- The user's routine role is limited to reviewing deployed Web results and correcting material direction drift, plus granting a genuinely missing permission when direct evidence proves it is required. Planning, decomposition, implementation, CI, deployment, compatibility, asset research, automation repair and ordinary troubleshooting belong to the autonomous system.
 - The user classifies this as a highly complex task and requires every AiwebDesign autonomous role to use **GPT-5.6 Sol High** (高级模式 / extended reasoning). The system must not intentionally use Instant or Medium, change models, downgrade, rotate or auto-select another model.
 
 ## Product identity
@@ -25,6 +27,9 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - Treat external-asset provenance, licensing basis, attribution, optimization and fallback as part of production quality rather than optional documentation.
 - Model and reasoning-level selection are user-owned invariants, not optimization targets for critics, curators, guards, technical research or future prompts.
 - The canonical Cloudflare deployment path is GitHub Actions plus an immutable receipt on `deployment-records`; a deployment is accepted only when the receipt matches the exact source SHA and records a passed smoke test. This path was locally verified for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`.
+- A real asynchronous boundary or verified tool failure is a recoverable checkpoint. Persist the exact SHA/state, direct error evidence, owner, next executable action and acceptance criteria; resume it in the next cycle before starting unrelated work.
+- Never declare GitHub/MCP or another connected capability unavailable solely because its schema is not already visible. Load the connector, make a real call, correct parameters and retry once, then use an applicable fallback such as repository fetch, public clone or Actions logs.
+- Repeated generic refusals without real tool evidence are automation faults. The primary controller and health/recovery guard are authorized to inspect and repair scheduled automation prompts, schedules and role boundaries without waiting for user intervention.
 
 ## Hard constraints
 - Use GPT-5.6 Sol High for all AiwebDesign autonomous roles. Do not intentionally use Instant or Medium, switch models or reduce reasoning effort.
@@ -34,6 +39,7 @@ This file contains stable project knowledge only. Do not use it as a scratchpad.
 - No source edit while another valid primary lease exists.
 - No push after failed syntax check or production build.
 - No completion claim until two consecutive independently verified scores reach at least 92/100.
+- Do not ask the user to solve routine code, GitHub, MCP, CI, build, deployment, browser, design, compatibility or automation-maintenance problems. Escalate only a proven new permission requirement, an irreversible product decision, a paid/licensed asset purchase or a credible security/legal risk.
 
 ## Promotion rule
 Add a new durable lesson only when:
