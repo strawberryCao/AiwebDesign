@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "source_sha": "11172f15d7a79ee4baa56cab82d1af511b0d3446",
+  "source_sha": "b57fbff9fd6efb0402599c2090ce966f243d075d",
   "deployment_url": "https://aiwebdesign-polar-index.caoheming139.workers.dev",
-  "verified_at": "2026-07-23T10:13:52.266Z",
+  "verified_at": "2026-07-23T10:21:11.452Z",
   "result": "passed",
   "scenarios": {
     "desktop": {
@@ -179,10 +179,10 @@
     "trace_on_failure": true,
     "video_on_failure": true
   },
-  "completed_at": "2026-07-23T10:19:58.655Z",
-  "workflow_run_id": "29998446550",
+  "completed_at": "2026-07-23T10:27:37.296Z",
+  "workflow_run_id": "29998507830",
   "workflow_run_attempt": 1,
   "workflow_step_outcome": "success",
-  "artifact_name": "browser-audit-11172f15d7a79ee4baa56cab82d1af511b0d3446",
-  "workflow_run_url": "https://github.com/strawberryCao/AiwebDesign/actions/runs/29998446550"
+  "artifact_name": "browser-audit-b57fbff9fd6efb0402599c2090ce966f243d075d",
+  "workflow_run_url": "https://github.com/strawberryCao/AiwebDesign/actions/runs/29998507830"
 }
