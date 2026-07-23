@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "projectId": "strawberryCao/AiwebDesign",
   "iteration": 2,
   "phase": "idle",
@@ -8,6 +8,13 @@
     "iteration": null,
     "acquiredAt": null,
     "expiresAt": null
+  },
+  "controlPlane": {
+    "stateMachineVersion": 1,
+    "queueSchemaVersion": 2,
+    "activeItemId": "Q-006",
+    "activeStrategyVersion": 1,
+    "lastQueueGovernanceAt": "2026-07-24T02:09:27+09:00"
   },
   "target": {
     "expectationScore": 92,
@@ -35,10 +42,10 @@
     "criticalRegression": null
   },
   "nextObjectiveId": "Q-006",
-  "lastCheckpoint": "iteration-2-exact-sha-browser-baseline-verified",
-  "lastSuccessfulStep": "deployment-and-browser-audit-receipts-passed",
+  "lastCheckpoint": "control-plane-state-machine-v1-migrated-await-current-main-exact-sha-evidence",
+  "lastSuccessfulStep": "queue-state-machine-v1-installed",
   "rollbackCommit": "d22c6e8b2664965696ff7b02c792e6e1965f5fb2",
   "blockers": [],
-  "memoryVersion": 3,
-  "updatedAt": "2026-07-22T22:41:51+09:00"
+  "memoryVersion": 4,
+  "updatedAt": "2026-07-24T02:09:27+09:00"
 }
