@@ -37,10 +37,19 @@ Before any action, read:
 - A stale lease may be cleared only after verifying that no newer commit, deployment or run-log entry belongs to it.
 
 ## Primary loop invariant
-One scheduled run performs the complete sequence itself:
+One scheduled run attempts the complete sequence itself:
 `hydrate memory -> acquire lease -> deploy untouched baseline -> inspect -> choose one batch -> source assets when useful -> edit -> validate -> commit -> deploy candidate -> compare -> score -> consolidate memory -> release lease`.
 
-Do not split one iteration across stateless conversations.
+Do not deliberately split work that can finish safely in one run. However, a real asynchronous boundary such as queued/in-progress CI, a pending exact-SHA receipt, a lease-safe interruption or a verified tool failure must not terminate the project. Persist the exact candidate SHA, failure evidence, owner and next executable action in `STATE.json`, `WORKING_SET.md`, `QUEUE.json` and/or `RUN_LOG.md`; release the lease when safe; and resume that same chain in the next scheduled run before starting unrelated work.
+
+## Long-horizon autonomy and recovery
+- This is a long-running autonomous project. A single run is responsible for one coherent, highest-value, verifiable advance, not for finishing the entire site.
+- The user has only two routine responsibilities: inspect deployed Web results and correct a material product-direction drift; grant a genuinely missing permission when direct tool evidence proves it is required.
+- Do not ask the user to diagnose ordinary code, design, GitHub, MCP, CI, build, deployment, browser, compatibility, asset or scheduling problems. Diagnose, decompose, assign, retry and checkpoint them autonomously.
+- Never infer that GitHub or another connected tool is unavailable merely because a schema is not already visible. Load the relevant connector schema, make a real tool call, correct parameters and retry once, then attempt an applicable fallback such as repository file fetch, public clone, Actions logs or another authoritative source.
+- If a problem cannot be solved in the current run, create or update a concrete queue item with owner, direct evidence, next action, acceptance condition and escalation condition. A single failed step is a recoverable checkpoint, not permission to repeat a generic refusal in later runs.
+- The primary controller and health/recovery guard may inspect and update the project's scheduled automations when prompts, schedules, tool-loading instructions or role boundaries are demonstrably causing repeated empty runs. Do not wait for user intervention to repair an automation fault.
+- Notify the user only for a proven new permission requirement, an irreversible product-direction decision, a paid/licensed asset purchase, or a credible security/legal risk.
 
 ## Cloudflare deployment evidence
 - `.github/workflows/deploy-cloudflare.yml` is the canonical production deployment path.
