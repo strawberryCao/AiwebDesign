@@ -113,13 +113,35 @@ For each proposed technique, record:
 - **Acceptance:** context-loss event is observed; navigation/editorial content remains usable; no uncontrolled exception loop occurs; either a clear fallback is shown or rendering restores exactly once; behavior is recorded for desktop and reduced-motion profiles.
 - **Abandon condition:** browser/renderer does not expose the extension in the verification environment, or the test requires invasive production hooks rather than browser-side evaluation.
 
+## Radar run — 2026-07-23 Q-006 canonical font provenance
+
+### EXP-005 — Vendor the canonical Inter and DM Mono files directly
+- **Status:** ready for a primary-loop candidate; research-only in this run. The previous DM Mono license uncertainty is resolved.
+- **Sources accessed 2026-07-23:**
+  - Inter upstream repository and latest release: https://github.com/rsms/inter and https://github.com/rsms/inter/releases
+  - Inter upstream web files: `docs/font-files/InterVariable.woff2` (344 KB) and `docs/font-files/Inter-Regular.woff2` (109 KB)
+  - Inter canonical license: https://github.com/google/fonts/blob/main/ofl/inter/OFL.txt
+  - DM Mono canonical family directory: https://github.com/google/fonts/tree/main/ofl/dmmono
+  - DM Mono metadata: https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/METADATA.pb
+  - DM Mono canonical license: https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/OFL.txt
+  - DM Mono source files: `DMMono-Regular.ttf` (48.6 KB) and `DMMono-Medium.ttf` (49.2 KB)
+- **Provider / authors:** Inter by Rasmus Andersson / Inter Project Authors. DM Mono is designed by Colophon Foundry and copyrighted to the DM Mono Project Authors; Google Fonts metadata points to upstream commit `57fadabfb200a77de2812540026c249dc3013077` in `googlefonts/dm-mono`.
+- **License / usage basis:** both Inter and DM Mono are licensed under SIL Open Font License 1.1. Redistribution with the application is permitted when the copyright notice and OFL text are retained. No visible in-product attribution is required by the license text.
+- **Repository problem:** Q-006 is blocked by a fragile Google Fonts hotlink and the now-resolved DM Mono provenance question. The current browser audit proves the hosted requests loaded once, not that the dependency is controlled or failure-safe.
+- **Expected benefit:** deterministic typography, removal of `fonts.googleapis.com`/`fonts.gstatic.com`, auditable licenses, offline/cached availability and a controlled fallback path. This closes the licensing blocker without changing the established type pairing.
+- **Download / integration:** vendor exact upstream files and license texts under a controlled `public/fonts/**` location. Prefer Inter's official variable WOFF2 for the current six upright weights. Convert the exact DM Mono Regular and Medium upstream TTFs to WOFF2 through a pinned, recorded toolchain, or use an audited package whose generated WOFF2 files can be traced to the same upstream commit. Add explicit `@font-face` rules with `font-display: swap` and retain the existing sans-serif/monospace fallbacks.
+- **Optimization plan:** ship only upright Latin/Latin-ext coverage actually required by the page; do not include italics or DM Mono Light. Record original TTF/WOFF2 sizes, final WOFF2 sizes and total transfer in the candidate run. The 344 KB Inter variable WOFF2 is acceptable for the spectacle-first desktop target, but compare it against a static-weight subset if the candidate tooling can produce materially smaller files without metric drift.
+- **Risk:** Inter v4 metrics can differ from older hosted builds; local WOFF2 conversion can become non-reproducible if the tool version is not pinned; preload misuse can delay other critical resources. These are typography/evidence risks, not reasons to keep the hotlink.
+- **Fallback:** if any local font request fails, the complete UI remains readable through the current system sans-serif and monospace stacks; font failure must not block WebGL initialization, scrolling or navigation.
+- **Minimum experiment:** replace only the remote font import and font-face plumbing. Do not combine with camera, material, HDRI, geometry or copy changes. Use Inter variable upright plus DM Mono 400/500.
+- **Measurable acceptance:** no request reaches Google Fonts hosts; all local font requests return 2xx; desktop/mobile/reduced-motion audits pass; title wrapping and panel text alignment remain within the baseline screenshots; a controlled blocked-font test remains readable; exact source commits, original sizes, shipped sizes and both OFL files are recorded in `ASSETS.md`.
+- **Abandon condition:** only if the canonical files cannot be reproduced into browser-supported WOFF2, the deployed candidate develops a critical layout/navigation regression that cannot be corrected within the typography-only scope, or the fallback becomes unreadable. File size alone is not an abandon condition.
+
 ## Current research backlog
-- Complete exact-SHA desktop/mobile/reduced-motion/browser-error verification using EXP-003 or equivalent direct evidence.
-- Exercise WebGL context loss/failure behavior through EXP-004 before claiming resilience.
+- Execute EXP-005 as the Q-006 primary-loop candidate and close the Google Fonts hotlink.
 - Camera rail and section-specific look targets rather than a single linear Y translation.
 - Scene-specific procedural identities using distinct geometry systems, not cloned cluster layouts.
-- GPU-friendly transition masks and depth-aware atmospheric effects.
-- Adaptive pixel ratio, effect quality and particle count based on measured frame behavior.
+- GPU-rich transition masks, volumetric depth and atmospheric effects suitable for the desktop-first spectacle target.
 - Deterministic seeded generation for reproducible visual comparisons.
-- Loading progress and graceful WebGL failure fallback.
+- Cinematic loading progress and graceful WebGL failure fallback.
 - Touch-specific interaction that is intentional rather than desktop pointer emulation.
