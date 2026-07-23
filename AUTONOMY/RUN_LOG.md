@@ -2,6 +2,25 @@
 
 Append-only evidence ledger. Newest entries go at the top below this introduction. Never remove or rewrite a completed entry; add a correction entry instead.
 
+## GOVERNANCE MIGRATION — executable queue state machine v1 — 2026-07-24T02:09:27+09:00
+- Actor: primary-controller governance repair.
+- Lease: `STATE.json.lease` was null; no product-source lease was acquired because this migration changed only autonomy control-plane documents.
+- Starting main SHA: `b57fbff9fd6efb0402599c2090ce966f243d075d`.
+- Problem: automation prompts required owner, retry and strategy fields, but `QUEUE.json` remained schema v1 with mostly unowned `ready` items and no executable transition or anti-loop state. The primary automation schedule had also drifted from the contracted two-hour cadence to hourly.
+- Implementation branch: `automation/state-machine-v1-20260724-0209`, created from `main` to avoid triggering production deployment for every intermediate governance-file update.
+- Changes:
+  - created `AUTONOMY/STATE_MACHINE.md` with explicit statuses, transitions, selection, CI checkpoints, attempt accounting, three-failure strategy escalation and full-queue governance;
+  - migrated `AUTONOMY/QUEUE.json` to schema v2 with `activeItemId=Q-006`, role owners, dependencies, direct evidence, concrete next actions, acceptance/abandon conditions, attempt history and strategy versions;
+  - synchronized `STATE.json` schema v3 control-plane pointers and `NEXT_PROMPT.md` queue binding;
+  - corrected `WORKING_SET.md` so the superseded claim that DM Mono licensing is unresolved cannot be restored;
+  - appended ADR-009 and promoted the user-directed state-machine operating rule to durable memory;
+  - restored the primary automation to a two-hour schedule.
+- Validation:
+  - direct GitHub connector reads confirmed the branch versions of queue schema v2 and state schema v3 with matching `Q-006` active/next pointers;
+  - a public `git clone` validation attempt failed with `Could not resolve host: github.com` in the local container; this was treated as an execution-environment DNS failure, not a repository failure, and validation continued through the authenticated GitHub connector;
+  - no product source, build configuration, application asset, score, deployment claim or candidate claim was changed.
+- Next checkpoint: after promotion, GitHub Actions must produce exact-current-main deployment and browser receipts before the primary loop acquires a product lease for Q-006. The old verified product baseline remains rollback evidence but cannot be substituted for the new main SHA.
+
 ## ITERATION 2 — blocked before source edit — 2026-07-22T21:05:42+08:00
 - Actor: primary-loop.
 - Lease: none active at hydration; no source-changing lease was retained because the mandatory browser gate could not be completed.
