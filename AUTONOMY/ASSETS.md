@@ -29,20 +29,23 @@ Unknown-rights files copied from reference websites are not acceptable substitut
 
 ### ASSET-001 — Inter and DM Mono hosted fonts
 - **Type:** font / hosted service
-- **Provider / author:** Google Fonts service; Inter Project Authors for Inter; exact DM Mono author record still requires family/package-level verification
+- **Provider / author:** Google Fonts service; Rasmus Andersson / Inter Project Authors for Inter; Colophon Foundry / DM Mono Project Authors for DM Mono
 - **Source:**
   - Runtime stylesheet: `https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800;900&display=swap`
+  - Inter upstream: `https://github.com/rsms/inter`
   - Inter canonical license: `https://github.com/google/fonts/blob/main/ofl/inter/OFL.txt`
-  - Google Fonts source/licensing repository: `https://github.com/google/fonts`
-- **License / usage basis:** Inter is verified as SIL Open Font License 1.1. Google Fonts documents that each family directory carries its specific license. The exact DM Mono family directory, author record and license file remain unresolved; do not infer them from another DM family.
-- **Attribution requirement:** Inter OFL requires retention of the copyright notice and license when redistributing the font software; no visible in-product credit is established as mandatory. DM Mono requirements remain pending exact-family verification.
+  - DM Mono canonical family directory: `https://github.com/google/fonts/tree/main/ofl/dmmono`
+  - DM Mono metadata: `https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/METADATA.pb`
+  - DM Mono canonical license: `https://raw.githubusercontent.com/google/fonts/main/ofl/dmmono/OFL.txt`
+- **License / usage basis:** Inter and DM Mono are both verified as SIL Open Font License 1.1. Google Fonts metadata identifies DM Mono's designer as Colophon Foundry and points to upstream `googlefonts/dm-mono` commit `57fadabfb200a77de2812540026c249dc3013077`. Bundling, embedding and redistribution with the application are permitted when the copyright notice and OFL text are retained.
+- **Attribution requirement:** retain each font's copyright notice and OFL text with redistributed font software. No visible in-product credit is required by the OFL text.
 - **Project location:** `src/style.css` first-line remote `@import`
-- **Optimization:** remote CSS/font loading; no local subset, preload or self-hosted package is recorded
-- **Fallback:** CSS falls back to `sans-serif` and `monospace`
+- **Optimization:** remote CSS/font loading; no local subset, preload or self-hosted package is recorded. Canonical upstream source sizes observed on 2026-07-23: Inter `InterVariable.woff2` 344 KB and `Inter-Regular.woff2` 109 KB; DM Mono `DMMono-Regular.ttf` 48.6 KB and `DMMono-Medium.ttf` 49.2 KB. Final candidate WOFF2 sizes must be measured after the pinned conversion/package step.
+- **Fallback:** CSS falls back to `sans-serif` and `monospace`; a controlled blocked-font test is still required.
 - **Introduced by:** bootstrap implementation; exact introducing commit not yet identified
-- **Verification:** static source verified; Inter license verified on 2026-07-22. The exact-SHA production page passed a top-level HTTP smoke test for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`, but that does not prove the Google Fonts requests succeeded or that fallback behavior was exercised. DM Mono exact license/authorship and browser-level production loading/caching/failure behavior remain unverified.
-- **Status:** needs_review
-- **Planned remediation:** EXP-001 in `RESEARCH.md` proposes package-level verified self-hosting after browser baseline verification.
+- **Verification:** static source and both canonical OFL records verified. Exact-SHA browser audit for `615fd15f43decd51a59e76481413e59e046153f4` reported `fonts_status: loaded` with zero failed requests in desktop, mobile and reduced-motion scenarios. This proves successful loading for that run, not hotlink durability or failure-fallback quality.
+- **Status:** license_verified_hotlink_pending_remediation
+- **Planned remediation:** EXP-005 in `RESEARCH.md` specifies direct canonical self-hosting for Q-006 using Inter variable upright plus DM Mono 400/500, with exact source commit, original/shipped sizes, retained OFL files and blocked-font fallback evidence.
 
 ### ASSET-002 — Three.js 0.185.1
 - **Type:** library
@@ -56,8 +59,8 @@ Unknown-rights files copied from reference websites are not acceptable substitut
 - **Optimization:** bundled by Vite; renderer pixel ratio is capped, but production bundle size and code splitting are unverified
 - **Fallback:** no verified non-WebGL application fallback beyond page-level HTML/CSS
 - **Introduced by:** bootstrap implementation; exact introducing commit not yet identified
-- **Verification:** static imports and pinned version verified; canonical MIT license verified on 2026-07-22. Build and top-level production smoke test passed for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`, but WebGL initialization, rendered-scene behavior and failure fallback remain pending direct browser verification.
-- **Status:** license_verified_runtime_pending
+- **Verification:** static imports and pinned version verified; canonical MIT license verified on 2026-07-22. Exact-SHA browser audit for `615fd15f43decd51a59e76481413e59e046153f4` passed desktop/mobile/reduced-motion WebGL2 initialization, complete scrolling and context loss/restoration. A user-facing WebGL creation-failure fallback remains unverified.
+- **Status:** license_and_runtime_verified_fallback_pending
 
 ### ASSET-003 — GSAP 3.15.0 and ScrollTrigger
 - **Type:** library
@@ -71,15 +74,15 @@ Unknown-rights files copied from reference websites are not acceptable substitut
 - **Optimization:** bundled by Vite; ScrollTrigger registration is skipped for reduced-motion users
 - **Fallback:** reduced-motion path avoids ScrollTrigger registration; full no-JavaScript behavior remains unverified
 - **Introduced by:** bootstrap implementation; exact introducing commit not yet identified
-- **Verification:** static imports and pinned version verified; canonical repository and standard-license basis verified on 2026-07-22. Build and top-level production smoke test passed for commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`, but scroll animation, reduced-motion and no-JavaScript fallback behavior remain pending browser verification.
-- **Status:** license_verified_runtime_pending
+- **Verification:** static imports and pinned version verified; canonical repository and standard-license basis verified on 2026-07-22. Exact-SHA browser audit for `615fd15f43decd51a59e76481413e59e046153f4` passed full desktop/mobile scrolling and reduced-motion behavior without console, page or failed-request errors.
+- **Status:** license_and_runtime_verified_nojs_fallback_pending
 
 ## Candidate assets
 No external model, HDRI, texture, icon, audio or video has entered a candidate build. `RESEARCH.md` EXP-002 records Poly Haven `Snow Field` as a researched CC0 HDRI candidate only; it must not be promoted here until selected and downloaded for an actual candidate build.
 
 ## Curator and radar findings
 - No duplicate active asset entries were found.
-- The production deployment receipt proves install, syntax check, build, deploy and top-level HTTP availability for exact commit `5bbc4a9bff1a1d31693884b7e90f2798b3aa3986`; it does not prove each runtime dependency or remote font request loaded successfully.
-- Three.js and GSAP licensing bases are canonically recorded; browser-level production loading/fallback behavior remains unverified.
-- Inter licensing is recorded; DM Mono exact family authorship/license remains unresolved and blocks ASSET-001 from verified status.
-- Before completion, identify introduction commits, retain required notices, verify production loading/fallback behavior, and either verify DM Mono exactly or replace/self-host it through a package carrying auditable metadata.
+- Inter and DM Mono authorship and canonical OFL 1.1 records are now verified; DM Mono license uncertainty is resolved.
+- The remaining ASSET-001 blocker is operational: remove the Google Fonts hotlink, vendor controlled WOFF2 files, retain both OFL records, measure shipped sizes and prove the fallback.
+- Three.js and GSAP licensing and normal-path browser behavior are verified by exact-SHA evidence; WebGL creation failure and no-JavaScript fallbacks remain open resilience work.
+- Before completion, identify introduction commits, retain required notices, eliminate fragile hotlinks and verify every asset's failure path.
