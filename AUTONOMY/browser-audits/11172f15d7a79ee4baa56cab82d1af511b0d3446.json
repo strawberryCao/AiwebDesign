@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "source_sha": "11172f15d7a79ee4baa56cab82d1af511b0d3446",
+  "deployment_url": "https://aiwebdesign-polar-index.caoheming139.workers.dev",
+  "verified_at": "2026-07-23T10:13:52.266Z",
+  "result": "passed",
+  "scenarios": {
+    "desktop": {
+      "name": "desktop",
+      "status": "passed",
+      "core_passed": true,
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "notes": [],
+      "http_status": 200,
+      "final_url": "https://aiwebdesign-polar-index.caoheming139.workers.dev/",
+      "title": "Polar Index — Spatial WebGL Studio",
+      "panel_count": 5,
+      "canvas_count": 1,
+      "webgl": {
+        "available": true,
+        "context_type": "webgl2",
+        "canvas_width": 1440,
+        "canvas_height": 1000,
+        "drawing_buffer_width": 1440,
+        "drawing_buffer_height": 1000,
+        "lose_context_extension": true
+      },
+      "scroll_checkpoints": [
+        0,
+        1450,
+        2850,
+        4175,
+        5375
+      ],
+      "interaction": {
+        "type": "pointer",
+        "completed": true,
+        "cursor_active": true
+      },
+      "layout": {
+        "scroll_y": 5450,
+        "scroll_height": 6450,
+        "viewport_height": 1000,
+        "bottom_reached": true,
+        "horizontal_overflow": false,
+        "prefers_reduced_motion": false,
+        "grain_animation_name": "grain",
+        "cursor_display": "block",
+        "fonts_status": "loaded",
+        "visible_text_length": 886,
+        "scene_label": "05"
+      },
+      "reduced_motion_applied": true,
+      "critical_failed_requests": [],
+      "screenshot": "test-results/browser-audit/desktop.png"
+    },
+    "mobile": {
+      "name": "mobile",
+      "status": "passed",
+      "core_passed": true,
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "notes": [],
+      "http_status": 200,
+      "final_url": "https://aiwebdesign-polar-index.caoheming139.workers.dev/",
+      "title": "Polar Index — Spatial WebGL Studio",
+      "panel_count": 5,
+      "canvas_count": 1,
+      "webgl": {
+        "available": true,
+        "context_type": "webgl2",
+        "canvas_width": 721,
+        "canvas_height": 1468,
+        "drawing_buffer_width": 721,
+        "drawing_buffer_height": 1468,
+        "lose_context_extension": true
+      },
+      "scroll_checkpoints": [
+        0,
+        1133,
+        2139,
+        3167,
+        4174
+      ],
+      "interaction": {
+        "type": "touch",
+        "completed": true
+      },
+      "layout": {
+        "scroll_y": 4237,
+        "scroll_height": 5076,
+        "viewport_height": 839,
+        "bottom_reached": true,
+        "horizontal_overflow": false,
+        "prefers_reduced_motion": false,
+        "grain_animation_name": "grain",
+        "cursor_display": "none",
+        "fonts_status": "loaded",
+        "visible_text_length": 874,
+        "scene_label": "05"
+      },
+      "reduced_motion_applied": true,
+      "critical_failed_requests": [],
+      "screenshot": "test-results/browser-audit/mobile.png"
+    },
+    "reduced_motion": {
+      "name": "reduced_motion",
+      "status": "passed",
+      "core_passed": true,
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "notes": [],
+      "http_status": 200,
+      "final_url": "https://aiwebdesign-polar-index.caoheming139.workers.dev/",
+      "title": "Polar Index — Spatial WebGL Studio",
+      "panel_count": 5,
+      "canvas_count": 1,
+      "webgl": {
+        "available": true,
+        "context_type": "webgl2",
+        "canvas_width": 1440,
+        "canvas_height": 1000,
+        "drawing_buffer_width": 1440,
+        "drawing_buffer_height": 1000,
+        "lose_context_extension": true
+      },
+      "scroll_checkpoints": [
+        0,
+        1450,
+        2850,
+        4175,
+        5375
+      ],
+      "interaction": {
+        "type": "pointer",
+        "completed": true,
+        "cursor_active": true
+      },
+      "layout": {
+        "scroll_y": 5450,
+        "scroll_height": 6450,
+        "viewport_height": 1000,
+        "bottom_reached": true,
+        "horizontal_overflow": false,
+        "prefers_reduced_motion": true,
+        "grain_animation_name": "none",
+        "cursor_display": "none",
+        "fonts_status": "loaded",
+        "visible_text_length": 886,
+        "scene_label": "01"
+      },
+      "reduced_motion_applied": true,
+      "critical_failed_requests": [],
+      "screenshot": "test-results/browser-audit/reduced_motion.png"
+    }
+  },
+  "webgl_recovery": {
+    "status": "passed",
+    "supported": true,
+    "context_lost": true,
+    "context_restored": true,
+    "dom_usable_after_loss": true,
+    "canvas_count_after_restore": 1,
+    "console_errors": [],
+    "page_errors": []
+  },
+  "artifacts": {
+    "html_report": "playwright-report",
+    "result_directory": "test-results",
+    "screenshots": [
+      "test-results/browser-audit/desktop.png",
+      "test-results/browser-audit/mobile.png",
+      "test-results/browser-audit/reduced_motion.png"
+    ],
+    "trace_on_failure": true,
+    "video_on_failure": true
+  },
+  "completed_at": "2026-07-23T10:19:58.655Z",
+  "workflow_run_id": "29998446550",
+  "workflow_run_attempt": 1,
+  "workflow_step_outcome": "success",
+  "artifact_name": "browser-audit-11172f15d7a79ee4baa56cab82d1af511b0d3446",
+  "workflow_run_url": "https://github.com/strawberryCao/AiwebDesign/actions/runs/29998446550"
+}
