@@ -1,117 +1,220 @@
 {
-  "schemaVersion": 1,
-  "updatedAt": "2026-07-22T22:41:51+09:00",
-  "selectionRule": "Choose one highest-value ready item supported by exact-SHA deployment and browser evidence; never bundle unrelated items.",
+  "schemaVersion": 2,
+  "stateMachineVersion": 1,
+  "stateMachineContract": "AUTONOMY/STATE_MACHINE.md",
+  "updatedAt": "2026-07-24T02:09:27+09:00",
+  "activeItemId": "Q-006",
+  "selectionRule": "Resume the active checkpoint first; otherwise choose the highest-priority ready item owned by the running role whose dependencies are completed. Never bundle unrelated product items.",
   "items": [
     {
       "id": "Q-001",
       "title": "Complete verified Cloudflare baseline browser audit",
+      "owner": "main",
       "status": "completed",
       "priority": 0,
       "expectedGain": "unblocked all evidence-based iteration",
       "risk": "closed by exact-SHA GitHub Actions evidence",
-      "researchRefs": [
-        "EXP-003",
-        "EXP-004"
-      ],
-      "acceptance": [
-        "record exact main SHA and matching immutable deployment receipt",
-        "record real Cloudflare URL and passed HTTP smoke test",
-        "inspect desktop and touch/mobile full-scroll behavior",
-        "record console, page-error and failed-request observations",
-        "verify reduced-motion behavior",
-        "exercise WebGL failure or context-loss recovery when supported"
-      ],
+      "dependencies": [],
+      "researchRefs": ["EXP-003", "EXP-004"],
       "evidence": {
         "sourceSha": "d22c6e8b2664965696ff7b02c792e6e1965f5fb2",
         "deploymentReceipt": "deployment-records:AUTONOMY/deployments/d22c6e8b2664965696ff7b02c792e6e1965f5fb2.json",
         "browserAuditReceipt": "deployment-records:AUTONOMY/browser-audits/d22c6e8b2664965696ff7b02c792e6e1965f5fb2.json",
         "workflowRunId": "29924558425",
         "result": "passed"
-      }
+      },
+      "nextAction": null,
+      "acceptance": [
+        "record exact main SHA and matching immutable deployment receipt",
+        "record real Cloudflare URL and passed HTTP smoke test",
+        "inspect desktop and touch/mobile full-scroll behavior",
+        "record console, page-error and failed-request observations",
+        "verify reduced-motion behavior",
+        "exercise WebGL context loss and restoration"
+      ],
+      "abandonCondition": null,
+      "attemptCount": 0,
+      "lastAttemptAt": null,
+      "lastErrorFingerprint": null,
+      "attemptHistory": [],
+      "strategyVersion": 1,
+      "doNotRetryUnless": null
     },
     {
       "id": "Q-006",
       "title": "Self-host and audit active fonts",
+      "owner": "main",
       "status": "ready",
       "priority": 92,
-      "expectedGain": "removes fragile font hotlinks and closes a documented provenance blocker",
-      "risk": "font metric changes or unnecessary payload",
-      "researchRef": "EXP-001",
+      "expectedGain": "removes fragile font hotlinks and closes a documented provenance blocker without diluting the spectacle-first visual direction",
+      "risk": "font metric drift, non-reproducible conversion or an incomplete fallback test",
+      "dependencies": ["Q-001"],
+      "researchRefs": ["EXP-005"],
+      "evidence": {
+        "research": "AUTONOMY/RESEARCH.md#EXP-005",
+        "assetLedger": "AUTONOMY/ASSETS.md#ASSET-001",
+        "provenanceStatus": "Inter and DM Mono authorship and SIL OFL 1.1 records verified",
+        "remainingBlocker": "Google Fonts hotlink remains active; local WOFF2 candidate and blocked-font evidence are not yet shipped"
+      },
+      "nextAction": "Verify exact current main SHA receipts, acquire the primary lease, vendor Inter variable upright plus DM Mono 400/500 with retained OFL records, replace only font-loading CSS, run install/check/build, and push iter-3 candidate.",
       "acceptance": [
-        "exact Inter and DM Mono package licenses/authors recorded",
-        "no requests to Google Fonts hosts",
-        "only required WOFF2 weights/subsets included",
-        "typography and fallback behavior verified on deployed candidate"
-      ]
+        "exact Inter and DM Mono sources, authors and licenses recorded",
+        "no runtime request to fonts.googleapis.com or fonts.gstatic.com",
+        "only the selected upright Inter and DM Mono 400/500 browser files are shipped",
+        "desktop, mobile and reduced-motion exact-SHA audits pass",
+        "title wrapping, panel alignment and mobile overflow do not materially regress",
+        "controlled local-font failure leaves the page readable and does not block WebGL, scrolling or navigation"
+      ],
+      "abandonCondition": "Abandon the selected file/conversion route only if it cannot produce traceable browser-supported WOFF2 or causes a critical typography/navigation regression that cannot be corrected within the typography-only scope; file size alone is not an abandon condition.",
+      "attemptCount": 0,
+      "lastAttemptAt": null,
+      "lastErrorFingerprint": null,
+      "attemptHistory": [],
+      "strategyVersion": 1,
+      "doNotRetryUnless": null
     },
     {
       "id": "Q-002",
       "title": "Replace linear camera descent with authored camera rail",
+      "owner": "main",
       "status": "ready",
       "priority": 90,
-      "expectedGain": "major improvement to spatial storytelling and transitions",
-      "risk": "scroll desynchronization or motion sickness",
+      "expectedGain": "major improvement to spatial storytelling, scene reveals and top-tier immersive-site pacing",
+      "risk": "scroll desynchronization, discontinuity or motion sickness",
+      "dependencies": ["Q-001"],
+      "evidence": {
+        "source": "current product direction and independent visual-review backlog",
+        "requiredBeforeStart": "Q-006 completed or deliberately reprioritized by new visual evidence"
+      },
+      "nextAction": "After the active item closes, inspect exact-SHA desktop screenshots and author distinct position/look-target keyframes per scene before changing geometry or assets.",
       "acceptance": [
         "distinct camera position and look target per scene",
-        "continuous interpolation without jumps",
-        "mobile and reduced-motion behavior verified"
-      ]
+        "continuous interpolation without visible jumps",
+        "desktop journey gains stronger reveals and spatial contrast",
+        "mobile and reduced-motion behavior remain usable"
+      ],
+      "abandonCondition": "Abandon a specific rail design if it repeatedly causes scroll discontinuity or motion sickness and a revised authored path does not resolve it within three evidence-backed strategies.",
+      "attemptCount": 0,
+      "lastAttemptAt": null,
+      "lastErrorFingerprint": null,
+      "attemptHistory": [],
+      "strategyVersion": 1,
+      "doNotRetryUnless": null
     },
     {
       "id": "Q-003",
       "title": "Create distinct procedural world identities",
+      "owner": "main",
       "status": "ready",
       "priority": 85,
-      "expectedGain": "reduces repeated-cluster appearance and improves project differentiation",
-      "risk": "GPU cost and visual incoherence",
+      "expectedGain": "reduces repeated-cluster appearance and creates a memorable multi-scene visual progression",
+      "risk": "visual incoherence or unstable rendering rather than ordinary GPU cost",
+      "dependencies": ["Q-001"],
+      "evidence": {
+        "source": "current visual direction and research backlog",
+        "requiredBeforeStart": "current active item completed and critic evidence confirms world repetition is the next highest gap"
+      },
+      "nextAction": "Prototype one coherent batch with at least three scene-specific procedural systems and shared crystalline art direction.",
       "acceptance": [
         "at least three visibly distinct procedural systems",
         "shared art direction remains coherent",
-        "adaptive quality limits geometry cost"
-      ]
+        "desktop presentation is materially more memorable",
+        "mobile remains usable and WebGL remains stable"
+      ],
+      "abandonCondition": "Abandon an individual geometry system if it reads as a disconnected style or causes reproducible instability; high but stable GPU cost alone is not an abandon condition.",
+      "attemptCount": 0,
+      "lastAttemptAt": null,
+      "lastErrorFingerprint": null,
+      "attemptHistory": [],
+      "strategyVersion": 1,
+      "doNotRetryUnless": null
     },
     {
       "id": "Q-007",
       "title": "Evaluate a CC0 snowy HDRI lighting pass",
-      "status": "ready",
+      "owner": "radar",
+      "status": "backlog",
       "priority": 82,
-      "expectedGain": "may add coherent crystalline reflections and roughness depth",
-      "risk": "literal outdoor reflections, startup cost or mobile memory pressure",
-      "researchRef": "EXP-002",
+      "expectedGain": "may add richer crystalline reflections and roughness depth",
+      "risk": "literal photographic reflections or unstable loading; asset size alone is not a blocker",
+      "dependencies": ["Q-001"],
+      "researchRefs": ["EXP-002"],
+      "evidence": {
+        "research": "AUTONOMY/RESEARCH.md#EXP-002",
+        "candidateStatus": "researched only; no HDRI has entered a product candidate"
+      },
+      "nextAction": "When assigned by main, select and vendor a licensed high-quality HDR/EXR variant, test environment lighting only, record transfer/decoded memory, and retain procedural-light fallback.",
       "acceptance": [
-        "use a vendored 1K or 2K CC0 HDR variant",
-        "record transfer and decoded-memory cost",
-        "compare material depth against procedural-light baseline",
-        "retain clean procedural-light fallback"
-      ]
+        "licensed source, author, exact file and project path recorded",
+        "visible improvement in crystalline material depth",
+        "desktop and mobile browser audits remain passed",
+        "WebGL recovery and navigation remain intact",
+        "failure cleanly restores procedural lighting"
+      ],
+      "abandonCondition": "Abandon a specific HDRI if reflections read as a literal landscape, the effect is not clearly superior, or reproducible memory instability occurs; do not abandon solely because the asset exceeds a conservative size target.",
+      "attemptCount": 0,
+      "lastAttemptAt": null,
+      "lastErrorFingerprint": null,
+      "attemptHistory": [],
+      "strategyVersion": 1,
+      "doNotRetryUnless": null
     },
     {
       "id": "Q-004",
       "title": "Add cinematic loading and failure recovery",
+      "owner": "main",
       "status": "ready",
       "priority": 80,
-      "expectedGain": "improves first impression and resilience",
-      "risk": "fake progress or delayed interaction",
-      "researchRef": "EXP-004",
+      "expectedGain": "improves first impression and makes heavy spectacle assets feel intentional rather than broken",
+      "risk": "fake progress, content trap or recovery state that obscures the experience",
+      "dependencies": ["Q-001"],
+      "researchRefs": ["EXP-004"],
+      "evidence": {
+        "browserBaseline": "context loss/restoration passed for the verified baseline",
+        "openGap": "user-facing WebGL creation failure and cinematic initialization are not implemented"
+      },
+      "nextAction": "Design a staged cinematic reveal tied to real initialization boundaries and a readable non-WebGL fallback without reducing the desktop effects budget.",
       "acceptance": [
         "honest initialization progress or staged reveal",
-        "WebGL failure fallback",
-        "no content trap for reduced motion or mobile"
-      ]
+        "user-facing WebGL creation failure fallback",
+        "no content trap for reduced motion or mobile",
+        "desktop first impression materially improves"
+      ],
+      "abandonCondition": "Abandon a specific loader concept if it delays usable content without delivering a clearly stronger first impression or creates an inaccessible trap.",
+      "attemptCount": 0,
+      "lastAttemptAt": null,
+      "lastErrorFingerprint": null,
+      "attemptHistory": [],
+      "strategyVersion": 1,
+      "doNotRetryUnless": null
     },
     {
       "id": "Q-005",
       "title": "Implement measured adaptive quality",
-      "status": "ready",
+      "owner": "main",
+      "status": "backlog",
       "priority": 75,
-      "expectedGain": "stabilizes visual quality across devices",
-      "risk": "quality oscillation or unreliable heuristics",
+      "expectedGain": "preserves ambitious desktop effects while preventing reproducible instability on weaker devices",
+      "risk": "quality oscillation or conservative tiers that flatten the desktop experience",
+      "dependencies": ["Q-001"],
+      "evidence": {
+        "currentPolicy": "performance is a blocker only for breakage, obvious instability or severe usability failure",
+        "requiredBeforeStart": "direct evidence of instability or a heavy-effects batch requiring bounded fallback"
+      },
+      "nextAction": "Only after direct instability evidence, define bounded effect tiers that preserve maximum desktop quality and degrade particles/post-processing before core art direction.",
       "acceptance": [
-        "bounded pixel ratio and effects tiers",
-        "particle or post-processing degradation path",
+        "desktop retains the highest visual tier",
+        "quality changes are bounded and do not oscillate",
+        "particle or post-processing degradation path exists",
         "no critical visual regression on desktop"
-      ]
+      ],
+      "abandonCondition": "Abandon heuristic adaptation if it causes visible oscillation or unnecessarily reduces stable desktop quality; prefer deterministic device tiers or explicit fallback instead.",
+      "attemptCount": 0,
+      "lastAttemptAt": null,
+      "lastErrorFingerprint": null,
+      "attemptHistory": [],
+      "strategyVersion": 1,
+      "doNotRetryUnless": null
     }
   ]
 }
